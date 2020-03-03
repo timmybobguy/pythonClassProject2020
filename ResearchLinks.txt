@@ -7,3 +7,12 @@ https://pypi.org/project/plantuml-markdown/
 
 3# PICKLE for serialising file
 https://docs.python.org/2/library/pickle.html
+
+
+TODO:
+
+-Create/get example .py files with varying degrees of complexity
+-Start creating examples of using the packages and how they work etc.
+
+
+
