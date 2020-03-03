@@ -1,0 +1,9 @@
+1# 
+https://yuml.me/diagram/scruffy/class/draw
+https://pypi.org/project/scruffy/#history
+
+2# 
+https://pypi.org/project/plantuml-markdown/
+
+3# PICKLE for serialising file
+https://docs.python.org/2/library/pickle.html
