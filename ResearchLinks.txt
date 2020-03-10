@@ -7,3 +7,20 @@ https://pypi.org/project/plantuml-markdown/
 
 3# PICKLE for serialising file
 https://docs.python.org/2/library/pickle.html
+
+4# pyreverse for creating Class diagrams
+https://pythonhosted.org/theape/documentation/developer/explorations/explore_graphs/explore_pyreverse.html
+
+5# read and open .py files
+https://stackoverflow.com/questions/1027714/how-to-execute-a-file-within-the-python-interpreter
+
+
+
+
+TODO:
+
+-Create/get example .py files with varying degrees of complexity
+-Start creating examples of using the packages and how they work etc.
+
+
+
