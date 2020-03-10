@@ -14,6 +14,9 @@ https://pythonhosted.org/theape/documentation/developer/explorations/explore_gra
 5# read and open .py files
 https://stackoverflow.com/questions/1027714/how-to-execute-a-file-within-the-python-interpreter
 
+6# graphviz for drawing class diagrams
+https://pypi.org/project/graphviz/
+
 
 
 
