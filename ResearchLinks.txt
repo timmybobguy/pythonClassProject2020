@@ -17,6 +17,9 @@ https://stackoverflow.com/questions/1027714/how-to-execute-a-file-within-the-pyt
 6# graphviz for drawing class diagrams
 https://pypi.org/project/graphviz/
 
+7#
+https://stackoverflow.com/questions/34511673/extracting-comments-from-python-source-code
+
 
 
 
