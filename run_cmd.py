@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import os
 import cmd
-import sys
-
+import ast
+import pylint
 
 class CLI(cmd.Cmd):
 
@@ -16,15 +16,13 @@ class CLI(cmd.Cmd):
         print( "hello again", arg, "!")
 
 
-    def do_run(args):
+    def do_run(self, arg):
     # get the file name/path
-        file_name = args.read['/Users/jimmy/py/pythonClassProject2020/sample1.txt']
+       fileObj = open('./test1.py', 'r')
+       print(fileObj.read())
 
-    # validate the file name/path
-        validate_file(file_name)
-    # read and print the file content
-        with open(file_name, 'r') as f:
-          print(f.read())
+
+
 
 
 

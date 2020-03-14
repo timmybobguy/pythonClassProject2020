@@ -2,7 +2,5 @@
 # -*- coding: utf-8 -*-\
 
 
-
-f = open("/Users/jimmy/py/pythonClassProject2020/sample1.txt", "r")
-
-print(f.read())
+fileObj = open('test1.py', 'r')
+print(fileObj.read())
