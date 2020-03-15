@@ -4,7 +4,7 @@ import os
 import cmd
 import ast
 import pylint
-# import graphviz
+import graphviz
 import subprocess
 
 
