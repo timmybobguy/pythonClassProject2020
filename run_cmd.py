@@ -4,7 +4,7 @@ import os
 import cmd
 import ast
 import pylint
-import graphviz
+# import graphviz
 import subprocess
 
 
@@ -31,18 +31,17 @@ class CLI(cmd.Cmd):
             print("No file found at: '" + path + "'")
 
     def do_generateDOT(self, args):
-        """Takes two parameters: source code file path, and output (dot) file path. This command turns the source
+        """Takes one parameter: source code file path. This command turns the source
         code file into a dot file of the program structure"""
 
         arguments = args.split()
 
-        if len(arguments) == 2:
+        if len(arguments) == 1:
 
             print("correct number")
             print(arguments[0])
-            print(arguments[1])
 
-            command = 'pyreverse dot ' + arguments[0] + ' -p componentplain -o ' + arguments[1]
+            command = 'pyreverse -o dot ' + arguments[0] + ' -p componentplain '
             subprocess.call(command)
 
         else:
