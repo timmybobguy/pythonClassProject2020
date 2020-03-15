@@ -48,6 +48,9 @@ class CLI(cmd.Cmd):
 
             print("Wrong num of args, please try again")
 
+    def do_saveDOTtoDatabase(self):
+        """Saves the dot file to the database server"""
+
 
 if __name__ == '__main__':
     CLI().cmdloop()
