@@ -4,9 +4,9 @@ import os
 import cmd
 import ast
 import pylint
-# import graphviz
 import subprocess
-
+import pep8
+import test_pep8
 
 class CLI(cmd.Cmd):
 
@@ -48,8 +48,24 @@ class CLI(cmd.Cmd):
 
             print("Wrong num of args, please try again")
 
-    def do_saveDOTtoDatabase(self):
-        """Saves the dot file to the database server"""
+
+    def do_pep(self, args):
+        arguments = args.split()
+
+        if len(arguments) == 1:
+
+            print("correct number")
+            print(arguments[0])
+
+            super(Pep8Test, self).__init__(unittest.TestCase)
+            print("Starting tests ..")
+            p1 = Pep8Test()
+            x = unittest.main()
+            p1(x)
+
+        else:
+
+            print("Wrong num of args, please try again")
 
 
 if __name__ == '__main__':

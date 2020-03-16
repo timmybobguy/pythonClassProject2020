@@ -20,6 +20,12 @@ https://pypi.org/project/graphviz/
 7#
 https://stackoverflow.com/questions/34511673/extracting-comments-from-python-source-code
 
+8# graphviz
+http://www.ffnn.nl/pages/articles/media/uml-diagrams-using-graphviz-dot.php
+
+9# validate data --pep8
+https://pep8.readthedocs.io/en/release-1.7.x/api.html#checker-classes
+
 
 
 
