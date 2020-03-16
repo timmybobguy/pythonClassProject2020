@@ -4,8 +4,10 @@ import os
 import cmd
 import ast
 import pylint
-import graphviz
 import subprocess
+from os import environ, pathsep
+
+os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
 
 class CLI(cmd.Cmd):
@@ -50,6 +52,11 @@ class CLI(cmd.Cmd):
 
     def do_saveDOTtoDatabase(self):
         """Saves the dot file to the database server"""
+
+    def do_testGraph(self, args):
+        # This is hard coded at the moment, need to change paths etc.
+        command = 'dot -Tpng classes_componentplain.dot -o ' + args
+        subprocess.call(command)
 
 
 if __name__ == '__main__':
