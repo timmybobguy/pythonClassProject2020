@@ -1,5 +1,12 @@
 Tim:
 
+NOTE: Make a local and online database which both have identical data. The program checks and tries to connect to the online server first, if it can then it updates the offline database (sqlite). If no connection then it opens data from the local (unupdated) database.
+https://pypi.org/project/mysql-to-sqlite3/
+use this package to do the transfer from mysql to sqlite
+
+This is an example of redundancy because when there is an internet connection it will update, but if not then the program can still run  
+
+
 12,13,2,6,7,10,14,15
 
 Jimmy:
