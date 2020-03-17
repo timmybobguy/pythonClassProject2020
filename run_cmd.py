@@ -45,38 +45,19 @@ class CLI(cmd.Cmd):
             print("correct number")
             print(arguments[0])
 
-            command = 'pyreverse -o dot ' + arguments[0] + ' -p ' + arguments[0]
-
-            try:
-
-                open(arguments[0], 'r')
-                subprocess.call(command)
-
-            except FileNotFoundError:
-
-                print("No file found at: '" + arguments[0] + "'")
+            command = 'pyreverse -o dot ' + arguments[0] + ' -p componentplain '
+            subprocess.call(command)
 
         else:
 
-            print("You have entered an incorrect number of arguments for this command, please try again or type 'help "
-                  "generateDOT' for more info")
+            print("Wrong num of args, please try again")
 
     def do_saveDOTtoDatabase(self, args):
         """Saves the dot file to the database server"""
         saveFileToMySqliteDatabase("test.png")
 
-    def do_generateGraph(self, args):
-        """Takes two parameters: .dot file path, output file path. This command takes the .dot file and outputs a
-        graphical representation of the file in the specified format."""
-        # Add functionality which allows the user to choose the output file type, this would mean the command has
-        # another parameter/option. These options could be retrieved from database?
-
-        arguments = args.split()
-
-        if len(args) == 2:
-
-            print("correct num of args")
-
+    def do_testGraph(self, args):
+        # This is hard coded at the moment, need to change paths etc.
         command = 'dot -Tpng classes_componentplain.dot -o ' + args
         subprocess.call(command)
 
@@ -88,9 +69,9 @@ def convertToBinaryData(filename):
     return blobData
 
 
-def saveFileToMySqliteDatabase(path):
-    conn = MySqlite()
-    try:
+    def saveFileToMySqliteDatabase(path):
+        conn = MySqlite()
+        try:
         conn.create_connection(r"pythonsqlite.db")
     except Exception as err:
         print(err)
