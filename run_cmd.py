@@ -7,6 +7,7 @@ import pylint
 import subprocess
 from os import environ, pathsep
 from sqlite import MySqlite
+from datetime import datetime
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
@@ -53,17 +54,7 @@ class CLI(cmd.Cmd):
 
     def do_saveDOTtoDatabase(self, args):
         """Saves the dot file to the database server"""
-        conn = MySqlite()
-        conn.create_connection(r"pythonsqlite.db")
-        conn.create_cursor()
-        fileData = convertToBinaryData('test.png')
-
-        sql = "INSERT INTO testData (fileData) VALUES (?)"
-        conn.execute_blob(sql, fileData)
-        print("file inserted")
-        conn.commit_changes()
-        conn.close_cursor()
-        conn.close_connection()
+        saveFileToMySqliteDatabase("test.png")
 
     def do_testGraph(self, args):
         # This is hard coded at the moment, need to change paths etc.
@@ -76,6 +67,19 @@ def convertToBinaryData(filename):
     with open(filename, 'rb') as file:
         blobData = file.read()
     return blobData
+
+
+def saveFileToMySqliteDatabase(path):
+    conn = MySqlite()
+    conn.create_connection(r"pythonsqlite.db")
+    conn.create_cursor()
+    fileData = convertToBinaryData(path)
+    sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path, datetime.now())
+    conn.execute_blob(sql, fileData)
+    print("File inserted into database")
+    conn.commit_changes()
+    conn.close_cursor()
+    conn.close_connection()
 
 
 if __name__ == '__main__':
