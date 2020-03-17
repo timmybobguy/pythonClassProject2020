@@ -13,7 +13,7 @@ class MySqlite:
 
     def close_connection(self):
         self.__connection.close()
-        print("DB connection closed")
+        print("DB connection closed...")
 
     def create_connection(self, db_file):
         """ create a database connection to a SQLite database """
@@ -23,7 +23,10 @@ class MySqlite:
         except Error as e:
             print(e)
         finally:
-            print("Connection established...")
+            print("DB connection established...")
+
+    def commit_changes(self):
+        self.__connection.commit()
 
     def create_cursor(self):
         self.__cursor = self.__connection.cursor()
@@ -42,8 +45,11 @@ class MySqlite:
         self.execute_query(query)
         return self.__cursor.fetchall()
 
+    def execute_blob(self, sql, data):
+        self.__cursor.execute(sql, [sqlite3.Binary(data)])
 
-if __name__ == '__main__':
+
+if __name__ == '__main__':  # For testing functions without using in main program
 
     mysqlite = MySqlite()
 

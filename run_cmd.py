@@ -6,6 +6,7 @@ import ast
 import pylint
 import subprocess
 from os import environ, pathsep
+from sqlite import MySqlite
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
@@ -50,8 +51,19 @@ class CLI(cmd.Cmd):
 
             print("Wrong num of args, please try again")
 
-    def do_saveDOTtoDatabase(self):
+    def do_saveDOTtoDatabase(self, args):
         """Saves the dot file to the database server"""
+        conn = MySqlite()
+        conn.create_connection(r"pythonsqlite.db")
+        conn.create_cursor()
+        fileData = convertToBinaryData('test.png')
+
+        sql = "INSERT INTO testData (fileData) VALUES (?)"
+        conn.execute_blob(sql, fileData)
+        print("file inserted")
+        conn.commit_changes()
+        conn.close_cursor()
+        conn.close_connection()
 
     def do_testGraph(self, args):
         # This is hard coded at the moment, need to change paths etc.
@@ -59,6 +71,11 @@ class CLI(cmd.Cmd):
         subprocess.call(command)
 
 
+def convertToBinaryData(filename):
+    # Convert digital data to binary format
+    with open(filename, 'rb') as file:
+        blobData = file.read()
+    return blobData
 
 
 if __name__ == '__main__':
