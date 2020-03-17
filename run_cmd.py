@@ -69,9 +69,9 @@ def convertToBinaryData(filename):
     return blobData
 
 
-    def saveFileToMySqliteDatabase(path):
-        conn = MySqlite()
-        try:
+def saveFileToMySqliteDatabase(path):
+    conn = MySqlite()
+    try:
         conn.create_connection(r"pythonsqlite.db")
     except Exception as err:
         print(err)
