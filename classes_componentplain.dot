@@ -1,10 +1,4 @@
 digraph "classes_componentplain" {
 charset="utf-8"
 rankdir=BT
-"0" [label="{Donkey|gender : str\lis_donkey : bool\lspeed : int\l|roar()\l}", shape="record"];
-"1" [label="{Equus|\l|run()\l}", shape="record"];
-"2" [label="{Horse|gender : str\lis_horse : bool\lspeed\l|roar()\l}", shape="record"];
-"0" -> "1" [arrowhead="empty", arrowtail="none"];
-"2" -> "1" [arrowhead="empty", arrowtail="none"];
-"0" -> "2" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="speed", style="solid"];
 }

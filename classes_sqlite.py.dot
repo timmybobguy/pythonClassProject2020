@@ -1,0 +1,5 @@
+digraph "classes_sqlite.py" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{MySqlite|\l|close_connection()\lclose_cursor()\lcommit_changes()\lconnection()\lcreate_connection(db_file)\lcreate_cursor()\lexecute_blob(sql, data)\lexecute_query(query)\lfetch_all(query)\lfetch_one(query)\l}", shape="record"];
+}
