@@ -61,6 +61,9 @@ class CLI(cmd.Cmd):
         command = 'dot -Tpng classes_componentplain.dot -o ' + args
         subprocess.call(command)
 
+    def do_quit(self, *args):
+        return True
+
 
     def convertToBinaryData(filename):
         # Convert digital data to binary format
