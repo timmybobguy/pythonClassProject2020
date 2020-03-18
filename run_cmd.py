@@ -8,7 +8,7 @@ import subprocess
 from os import environ, pathsep
 from sqlite import MySqlite
 from datetime import datetime
-import validate_data
+
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
 
@@ -62,31 +62,29 @@ class CLI(cmd.Cmd):
         subprocess.call(command)
 
 
-    def convertToBinaryData(filename):
-        # Convert digital data to binary format
-        with open(filename, 'rb') as file:
-            blobData = file.read()
-        return blobData
+def convertToBinaryData(filename):
+    # Convert digital data to binary format
+    with open(filename, 'rb') as file:
+        blobData = file.read()
+    return blobData
 
 
-    def saveFileToMySqliteDatabase(path):
-        conn = MySqlite()
+def saveFileToMySqliteDatabase(path):
+    conn = MySqlite()
+    try:
         conn.create_connection(r"pythonsqlite.db")
-        conn.create_cursor()
-        fileData = convertToBinaryData(path)
-        sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path, datetime.now())
-        conn.execute_blob(sql, fileData)
-        print("File inserted into database")
-        conn.commit_changes()
-        conn.close_cursor()
-        conn.close_connection()
+    except Exception as err:
+        print(err)
+        print("Cannot connect to local database file")
 
-    def ValidateDate(self):
-        """checking the pep8"""
-        VD = ValidateData()
-        VD.check_file()
-
-
+    conn.create_cursor()
+    fileData = convertToBinaryData(path)
+    sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path, datetime.now())
+    conn.execute_blob(sql, fileData)
+    print("File inserted into database")
+    conn.commit_changes()
+    conn.close_cursor()
+    conn.close_connection()
 
 
 if __name__ == '__main__':
