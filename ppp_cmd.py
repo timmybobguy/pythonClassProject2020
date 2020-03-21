@@ -18,12 +18,15 @@ class CLI(cmd.Cmd):
 
     def __init__(self):
         cmd.Cmd.__init__(self)
-        self.prompt = "===>>>>>> "
+        self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
 
-    def do_hist(self, args):
-        """Print a list of commands that have been entered"""
-        print(self._hist)
+    def do_choose_system(self, arg):
+        """ please imput -w or -m  to tell us your operation system, Windows or Mac"""
+        if arg == "-w":
+            print('Windows lover')
+        elif arg == "-m":
+            print('Mac lover')
 
     def do_exit(self, args):
         """Exits from the console"""
@@ -37,7 +40,8 @@ class CLI(cmd.Cmd):
 
 
     def do_uml_diagram(self, args):
-        """PLASE input full path and can have options on two different diagram types """
+        """PLASE input full path and can have
+         options on two different diagram types """
         raw_data = args.split()
         input_file = raw_data[0]
         file_type = raw_data[1]
@@ -72,23 +76,22 @@ class CLI(cmd.Cmd):
         "input a full path of your file, then the programme can check your file weather pass pep8 or not"
         ValidateData().check_file(args)
 
+    def do_bar_chart(self, args):
+        """input a full path of your file, then the programme can generate a bar chart
+        which shows a number of package used and  a numbe of features in your cmd file """
+        ExtractData().get_data(args)
+        ExtractData().draw_bar_chart()
+
+    def do_link_MySql(self):
+        link_db().check_link_db()
+
+    def do_save_data(self):
+        link_db().get_file(args)
+        link_db().link_mysql_save()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def do_load_data(self):
+         link_db().load_mysql_data()
 
 
 if __name__ == '__main__':

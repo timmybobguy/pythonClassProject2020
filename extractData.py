@@ -30,7 +30,7 @@ class ExtractData:
         for i in func:
             j = i.strip('def')
             self.func_all.append(j)
-        #print(self.func_all)
+        print(self.func_all)
 
 
         for i in imp:
@@ -44,11 +44,11 @@ class ExtractData:
         data = [num1, num2]
         plt.bar(['Features', 'packages used'], data)
         plt.show()
-"""
+
 if __name__ == '__main__':
-    ExtractData().get_file(;)
+    ExtractData().get_data('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
     ExtractData().draw_bar_chart()
-"""
+
 
 
 

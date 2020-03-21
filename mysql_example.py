@@ -48,6 +48,17 @@ class link_db:
             mydb.rollback()
         mydb.close()
 
+    def check_link_db(self):
+        mydb = pymysql.connect(host="127.0.0.1", user="root", passwd="1234", database="class")
+        if (mydb):
+            # Carry out normal procedure
+            print("Connection successful")
+        else:
+            # Terminate
+            print("Connection unsuccessful")
+
+
+
     def load_mysql_data(self):
         db = pymysql.connect(host="127.0.0.1", user="root", passwd="1234", database="class")
         cursor = db.cursor()
@@ -66,14 +77,11 @@ class link_db:
             print("Error: unable to fetch data")
 
 
-
-
-
-
-
 """
 if __name__ == '__main__':
     link_db().get_file("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
     link_db().link_mysql_save()
     link_db().load_mysql_data()
+    link_db().check_link_db()
+
 """
