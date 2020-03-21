@@ -6,7 +6,7 @@ import subprocess
 import os
 
 
-class ValidateData():
+class ValidateData:
 
     def __init__(self):
         pass
@@ -17,10 +17,10 @@ class ValidateData():
         print(command)
         subprocess.run(command, cwd=get_file_name, shell=True)
 
-
+"""
 if __name__ == '__main__':
     ValidateData().check_file("/Users/jimmy/py/pythonClassProject2020/run_cmd.py")
-
+"""
 
 
 
