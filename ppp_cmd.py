@@ -10,8 +10,7 @@ from sqlite import MySqlite
 from datetime import datetime
 from extractData import ExtractData
 from validate_data import ValidateData
-
-#os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
+from mysql_example import link_db
 
 
 class CLI(cmd.Cmd):
@@ -32,7 +31,6 @@ class CLI(cmd.Cmd):
         """Exits from the console"""
         exit()
 
-        ## Command definitions to support Cmd object functionality ##
 
     def do_EOF(self, args):
         """Exit on system end of file character"""
@@ -82,15 +80,18 @@ class CLI(cmd.Cmd):
         ExtractData().get_data(args)
         ExtractData().draw_bar_chart()
 
-    def do_link_MySql(self):
+    def do_mySql(self, arg):
+        """this can check weather the db links """
         link_db().check_link_db()
 
-    def do_save_data(self):
+    def do_save_data(self, args):
+        """this can save data to MySql database"""
         link_db().get_file(args)
         link_db().link_mysql_save()
 
 
-    def do_load_data(self):
+    def do_load_data(self, arg):
+         """this can laod data from MySql database"""
          link_db().load_mysql_data()
 
 

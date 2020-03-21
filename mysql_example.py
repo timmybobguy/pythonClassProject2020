@@ -50,8 +50,9 @@ class link_db:
 
     def check_link_db(self):
         mydb = pymysql.connect(host="127.0.0.1", user="root", passwd="1234", database="class")
+
         if (mydb):
-            # Carry out normal procedure
+
             print("Connection successful")
         else:
             # Terminate
