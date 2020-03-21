@@ -8,7 +8,6 @@ import subprocess
 from os import environ, pathsep
 from sqlite import MySqlite
 from datetime import datetime
-
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
 
@@ -85,6 +84,7 @@ def saveFileToMySqliteDatabase(path):
     conn.commit_changes()
     conn.close_cursor()
     conn.close_connection()
+
 
 
 if __name__ == '__main__':
