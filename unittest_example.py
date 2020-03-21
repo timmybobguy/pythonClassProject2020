@@ -12,8 +12,9 @@ class ExampleTest(unittest.TestCase):
     def test_checkdirectory(self):
         self.assertEqual(Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'), 'test4.py')
 
-    def test_validate_function(self):
-        self.assertEqual(ValidateData().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'),)
+    def test_ckeckPicture(self):
+        self.assertEqual()
+
 
 
 
