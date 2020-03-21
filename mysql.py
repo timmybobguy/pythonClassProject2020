@@ -1,5 +1,5 @@
 import asyncio
-import pymysql
+import aiomysql
 
 
 class MySQL:
@@ -16,7 +16,7 @@ class MySQL:
         self.__connection = connection
 
     async def create_connection(self, db_config):
-        self.__connection = pymysql.connect(**db_config)
+        self.__connection = await aiomysql.connect(**db_config)
         print("Connection established...")
 
     def close_connection(self):

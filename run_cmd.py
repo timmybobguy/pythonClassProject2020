@@ -8,6 +8,7 @@ import subprocess
 from os import environ, pathsep
 from sqlite import MySqlite
 from datetime import datetime
+
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
 
@@ -44,6 +45,13 @@ class CLI(cmd.Cmd):
             print("correct number")
             print(arguments[0])
 
+            try:
+                open(arguments[0], 'r').read()
+
+            except FileNotFoundError:
+
+                print("No file found at: '" + arguments[0] + "'")
+
             command = 'pyreverse -o dot ' + arguments[0] + ' -p componentplain '
             subprocess.call(command)
 
@@ -78,13 +86,13 @@ def saveFileToMySqliteDatabase(path):
 
     conn.create_cursor()
     fileData = convertToBinaryData(path)
-    sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path, datetime.now())
+    sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path,
+                                                                                                      datetime.now())
     conn.execute_blob(sql, fileData)
-    print("File inserted into database")
+    print('File inserted into database')
     conn.commit_changes()
     conn.close_cursor()
     conn.close_connection()
-
 
 
 if __name__ == '__main__':
