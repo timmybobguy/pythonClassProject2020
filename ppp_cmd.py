@@ -152,18 +152,21 @@ def convertToBinaryData(filename):
 
 def saveFileToLocalDatabase(path):
     conn = MySqlite()
-    try:
-        conn.create_connection(r"pythonsqlite.db")
-    except Exception as err:
-        print(err)
-        print("Cannot connect to local database file")
-
+    conn.create_connection(r"pythonsqlite.db")
     conn.create_cursor()
-    fileData = convertToBinaryData(path)
-    sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path,
-                                                                                                      datetime.now())
-    conn.execute_blob(sql, fileData)
-    print('File inserted into database')
+
+    try:
+
+        fileData = convertToBinaryData(path)
+        sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path,
+                                                                                                          datetime.now())
+        conn.execute_blob(sql, fileData)
+        print("File inserted into db...")
+
+    except FileNotFoundError:
+
+        print("File path does not exist")
+
     conn.commit_changes()
     conn.close_cursor()
     conn.close_connection()
