@@ -13,22 +13,22 @@ class UnitTests(unittest.TestCase):
         pass
 
     def test_sqlite_createConnectionFail(self):
-        conn = MySqlite
+        conn = MySqlite()
         self.assertEqual(conn.connection(), None)
 
     def test_sqlite_createCursor(self):
         pass
 
     def test_sqlite_createCursorFail(self):
-        conn = MySqlite
+        conn = MySqlite()
         self.assertEqual(conn.cursor(), None)
 
     def test_sqlite_executeQuery(self):
-        conn = MySqlite
+        conn = MySqlite()
         conn.create_connection(r"pythonsqlite.db")
         conn.create_cursor()
         result = conn.fetch_one("""SELECT fileSaveDate from testData WHERE fileName = "test.png" """)
-        self.assertEqual(result, "2020-03-17 22:49:20.890304")
+        self.assertEqual(result, ('2020-03-17 22:49:20.890304',))
 
     # MySql tests
 
@@ -41,7 +41,19 @@ class UnitTests(unittest.TestCase):
     def test_mysql_executeQuery(self):
         pass
 
+    # JsonTesting tests
+
+    def test_jsonTesting_open_file(self):
+        pass
+
+    def test_jsonTesting_open_fileFail(self):
+        pass
+
+    def test_jsonTesting_get_help_text(self):
+        pass
+
+    def test_jsonTesting_get_help_textFail(self):
+        pass
 
 if __name__ == '__main__':
-
-    pass
+    unittest.main()
