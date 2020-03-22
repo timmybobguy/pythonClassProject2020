@@ -4,16 +4,82 @@ import unittest
 from example import func1, func2
 from checkfiles import Check_directory
 from validate_data import ValidateData
+from mysql_example import link_db
+from ppp_cmd import *
 
 class ExampleTest(unittest.TestCase):
-    """Test example
-    """
+    """Jimmy's unittest """
 
     def test_checkdirectory(self):
         self.assertEqual(Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'), 'test4.py')
 
-    def test_ckeckPicture(self):
-        self.assertEqual()
+
+    def test_correct_input_path(self):
+        try:
+            result = Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py')
+            self.assertIsInstance(result, str)
+        except WrongInputException:
+            self.fail()
+
+    def test_mydb_link(self):
+        self.assertRaises(FileNotFoundError, ValidateData().check_file, "FileNotFoundError")
+
+    def test_correct_path_validate_data(self):
+
+        result = CLI().do_ValidateData('/Users/jimmy/py/pythonClassProject2020/test3.py')
+        self.assertTrue(result)
+
+    def test_wrong_path_validate_data(self):
+
+        result = CLI().do_ValidateData('This is Jimmy')
+        self.assertFalse(result)
+
+    def test_correct_do_bar_chart(self):
+        result = CLI().do_bar_chart('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+        self.assertTrue(result)
+
+    def test_wrong_do_bar_chart(self):
+        result = CLI().do_bar_chart('LoveYou')
+        self.assertFalse(result)
+
+    def test_correct_input_do_bar_chart(self):
+        try:
+            result = Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+            self.assertIsInstance(result, str)
+        except WrongInputException:
+            self.fail()
+
+    def test_do_exit(self):
+        result = CLI().do_exit()
+        self.assertIsInstance(result, bool)
+
+    def test_return_do_exit(self):
+        result = CLI().do_exit()
+        self.assertTrue(result)
+
+    def test_throw_raise(self):
+        self.assertRaises(FileNotFoundError, ValidateData().check_file, "You should input a correct path")
+
+    def test_false_do_save_data(self):
+        result = CLI().do_save_data('1234')
+        self.assertFalse(result)
+
+    def test_true_do_save_data(self):
+        result = CLI().do_save_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+        self.assertTrue(result)
+
+    #def test_correct_do_load_data(self):
+        #self.assertRaises(FileNotFoundError, CLI().do_load_data, "cannot load data from the database")
+
+
+
+
+
+
+
+
+
+
 
 
 
