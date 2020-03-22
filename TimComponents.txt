@@ -12,10 +12,12 @@ Components worked on by Tim:
     Robustness:
 
     Implementation:
+        Had issues implementing this component into the CMD class as I needed to be able to await some
+        of the functions when interacting with the database server
 
 3. Extract data
     Robustness:
-
+        My json
     Implementation:
 
 4. Deal with file directory
@@ -44,11 +46,6 @@ Components worked on by Tim:
     Implementation:
 
 9. Display command help
-    Robustness:
-
-    Implementation:
-
-10. Change commands and options
     Robustness:
 
     Implementation:
