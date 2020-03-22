@@ -2,21 +2,21 @@
 # -*- coding: utf-8 -*-
 import unittest
 from example import func1, func2
-from checkfiles import Check_directory
+from checkfiles import CheckDirectory
 from validate_data import ValidateData
-from mysql_example import link_db
-from ppp_cmd import *
+from mysql_example import LinkDb
+from ppp_cmd import*
+
 
 class ExampleTest(unittest.TestCase):
     """Jimmy's unittest """
 
     def test_checkdirectory(self):
-        self.assertEqual(Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'), 'test4.py')
-
+        self.assertEqual(CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'), 'test4.py')
 
     def test_correct_input_path(self):
         try:
-            result = Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py')
+            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py')
             self.assertIsInstance(result, str)
         except WrongInputException:
             self.fail()
@@ -44,7 +44,7 @@ class ExampleTest(unittest.TestCase):
 
     def test_correct_input_do_bar_chart(self):
         try:
-            result = Check_directory().check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
             self.assertIsInstance(result, str)
         except WrongInputException:
             self.fail()
@@ -67,16 +67,6 @@ class ExampleTest(unittest.TestCase):
     def test_true_do_save_data(self):
         result = CLI().do_save_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
         self.assertTrue(result)
-
-    #def test_correct_do_load_data(self):
-        #self.assertRaises(FileNotFoundError, CLI().do_load_data, "cannot load data from the database")
-
-
-
-
-
-
-
 
 
 

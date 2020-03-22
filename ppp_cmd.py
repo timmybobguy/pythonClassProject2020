@@ -10,7 +10,7 @@ from sqlite import MySqlite
 from datetime import datetime
 from extractData import ExtractData
 from validate_data import ValidateData
-from mysql_example import link_db
+from mysql_example import LinkDb
 
 
 class CLI(cmd.Cmd):
@@ -28,6 +28,7 @@ class CLI(cmd.Cmd):
             print('Mac lover')
 
     def do_exit(self, *args):
+        """leave the programme"""
         return True
 
 
@@ -63,9 +64,8 @@ class CLI(cmd.Cmd):
                 print("input_dir:{0} input_file:{1}".format(work_dir, file))
                 print("command:" + command)
                 subprocess.run(command, cwd=work_dir, shell=True)
-
-        else:
-            print(" You only have 3 options which are svg, dot and fig in the file types")
+            else:
+                print(" You only have 3 options which are svg, dot and fig in the file types")
 
     def do_extractData(self, args):
         """This can load a cmd interface file and extract data from it"""
@@ -95,19 +95,23 @@ class CLI(cmd.Cmd):
         return path
 
     def do_mySql(self,arg):
-        """this can check weather the db links """
+        """this can check weather the db links.
+        please make sure your Mysql have a database which is
+        host="127.0.0.1", user="root", passwd="1234", database="class"""
 
-        link_db().check_link_db()
+        LinkDb().check_link_db()
 
         return True
 
 
     def do_save_data(self, args):
-        """this can save data to MySql database"""
+        """this can save data to MySql database.
+        please make sure your Mysql have a database which is
+        host="127.0.0.1", user="root", passwd="1234", database="class"""
         try:
             path = True
-            link_db().get_file(args)
-            link_db().link_mysql_save()
+            LinkDb().get_file(args)
+            LinkDb().link_mysql_save()
         except:
             print("wrong path, try again")
             path = False
@@ -115,11 +119,13 @@ class CLI(cmd.Cmd):
 
 
     def do_load_data(self, args):
-         """this can laod data from MySql database"""
-         try:
-             link_db().load_mysql_data()
-         except:
-             raise FileNotFoundError("cannot load data from the database")
+        """This can laod data from MySql database.
+         please make sure your Mysql have a database which is host="127.0.0.1", user="root",
+         passwd="1234", database="class"""
+        try:
+            LinkDb().load_mysql_data()
+        except:
+            raise FileNotFoundError("cannot load data from the database")
 
 
     def do_printFile(self, path):
@@ -171,45 +177,44 @@ class CLI(cmd.Cmd):
         subprocess.call(command)
 
 
-def convertToBinaryData(filename):
-    # Convert digital data to binary format
-    with open(filename, 'rb') as file:
-        blobData = file.read()
-    return blobData
+    def convertToBinaryData(filename):
+        # Convert digital data to binary format
+        with open(filename, 'rb') as file:
+            blobData = file.read()
+        return blobData
 
 
-def saveFileToLocalDatabase(path):
-    conn = MySqlite()
-    conn.create_connection(r"pythonsqlite.db")
-    conn.create_cursor()
-
-    try:
-
-        fileData = convertToBinaryData(path)
-        sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path,
-                                                                                                          datetime.now())
-        conn.execute_blob(sql, fileData)
-        print("File inserted into db...")
-
-    except FileNotFoundError:
-
-        print("File path does not exist")
-
-    conn.commit_changes()
-    conn.close_cursor()
-    conn.close_connection()
-
-
-def getFileFromLocalDatabase(filename):
-    conn = MySqlite()
-    try:
+    def saveFileToLocalDatabase(path):
+        conn = MySqlite()
         conn.create_connection(r"pythonsqlite.db")
-    except Exception as err:
-        print("Cannot connect to local db: " + err)
-    conn.create_cursor()
-    sql = """SELECT fileData FROM testData WHERE fileName = "{}" """.format(filename)
-    result = conn.fetch_all(sql)
-    print(result)
+        conn.create_cursor()
+
+        try:
+
+            fileData = convertToBinaryData(path)
+            sql = """INSERT INTO testData (fileName, fileData, fileSaveDate) VALUES ("{}", ?, "{}")""".format(path,
+                                                                                                              datetime.now())
+            conn.execute_blob(sql, fileData)
+            print("File inserted into db...")
+
+        except FileNotFoundError:
+
+            print("File path does not exist")
+
+        conn.commit_changes()
+        conn.close_cursor()
+        conn.close_connection()
+
+    def getFileFromLocalDatabase(filename):
+        conn = MySqlite()
+        try:
+            conn.create_connection(r"pythonsqlite.db")
+        except Exception as err:
+            print("Cannot connect to local db: " + err)
+        conn.create_cursor()
+        sql = """SELECT fileData FROM testData WHERE fileName = "{}" """.format(filename)
+        result = conn.fetch_all(sql)
+        print(result)
 
 
 if __name__ == '__main__':

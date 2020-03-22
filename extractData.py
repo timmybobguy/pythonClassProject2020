@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pandas import Series, DataFrame
-from checkfiles import Check_directory
+from checkfiles import CheckDirectory
 
 
 class ExtractData:
@@ -20,7 +20,7 @@ class ExtractData:
         pass
 
     def get_data(self, cmd_file):
-        file_name = Check_directory.check_file(self, cmd_file)
+        file_name = CheckDirectory.check_file(self, cmd_file)
         print(file_name)
         file = open(file_name)
         file1 = file.read()
@@ -31,7 +31,6 @@ class ExtractData:
             j = i.strip('def')
             self.func_all.append(j)
         print(self.func_all)
-
 
         for i in imp:
             j = i.strip('import')
@@ -48,8 +47,8 @@ class ExtractData:
 if __name__ == '__main__':
     ExtractData().get_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
     ExtractData().draw_bar_chart()
-
 """
+
 
 
 

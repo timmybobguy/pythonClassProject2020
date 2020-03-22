@@ -4,7 +4,7 @@ import os
 import subprocess
 
 
-class Check_directory:
+class CheckDirectory:
 
     def __init__(self):
         pass
