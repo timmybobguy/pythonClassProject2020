@@ -23,8 +23,8 @@
     },
 
     {
-      "functionName": "",
-      "helpText" : ""
+      "functionName": "getAllSourceFiles",
+      "helpText" : "Takes a directory path, and optionally -a with an output file type (SVG, FIG or DOT) to turn all source code files found into diagrams"
     },
 
     {

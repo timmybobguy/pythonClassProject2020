@@ -5,7 +5,7 @@ import cmd
 import ast
 import pylint
 import subprocess
-from os import environ, pathsep
+from os import environ, pathsep, path
 from sqlite import MySqlite
 from datetime import datetime
 from extractData import ExtractData
@@ -21,6 +21,7 @@ from jsonTesting import JsonData
 from argparse import ArgumentParser
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
+
 
 class CustomStream(object):
     async def readline(self):
@@ -50,6 +51,33 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         json = JsonData('helpfiledata.json')
         json.open_file()
         self.__json = json
+
+    def do_getAllSourceFiles(self, arg):
+        arguments = arg.split()
+
+        if len(arguments) != 0:
+
+            if path.isdir(arguments[0]):
+                files = []
+                for file in os.listdir(arguments[0]):
+                    if file.endswith(".py"):
+                        print(os.path.join(arguments[0], file))
+                        files.append(os.path.join(arguments[0], file))
+
+                if len(arguments) == 3 and arguments[1] == "-a":
+                    if arguments[2] == "svg" or "dot" or "fig":
+                        for file in files:
+                            self.do_uml_diagram(file + " " + arguments[2])
+                    else:
+                        print("Incorrect output format entered")
+                else:
+                    print("Please enter the correct number of args, see help for more information")
+            else:
+                print("Directory not valid")
+
+
+    def help_getAllSourceFiles(self):
+        print(self.__json.get_help_text('getAllSourceFiles'))
 
     def do_shelve(self, cmd_file):
         file_name = CheckDirectory.check_file(self, cmd_file)
