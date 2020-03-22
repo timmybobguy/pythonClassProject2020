@@ -11,6 +11,9 @@ from datetime import datetime
 from extractData import ExtractData
 from validate_data import ValidateData
 from mysql_example import LinkDb
+from checkfiles import CheckDirectory
+import re
+import shelve
 from mysql import MySQL
 import cmdAdapter
 import asyncio
@@ -46,7 +49,20 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         json.open_file()
         self.__json = json
 
+    def do_shelve(self,cmd_file):
+        file_name = CheckDirectory.check_file(self, cmd_file)
+        print(file_name)
+        file = open(file_name)
+        file1 = file.read()
+        imp = re.findall(r"import\s\w+", file1, re.S)
+        s = shelve.open("test")
+        s['package'] = imp
+        print(s['package'])
+        s.close()
+
+
     def do_choose_system(self, arg):
+        """ please input -w or -m  to tell us your operation system, Windows or Mac"""
         if arg == "-w":
             print('Windows lover')
         elif arg == "-m":
@@ -56,9 +72,13 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         print(self.__json.get_help_text('choose_system'))
 
     def do_exit(self, *args):
+        """leave the programme"""
         return True
 
+
     def do_uml_diagram(self, args):
+        """PLEASE input full path and can have
+         options on two different diagram types """
         raw_data = args.split()
         input_file = raw_data[0]
         file_type = raw_data[1]
@@ -88,7 +108,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
                 print("input_dir:{0} input_file:{1}".format(work_dir, file))
                 print("command:" + command)
                 subprocess.run(command, cwd=work_dir, shell=True)
-
             else:
                 print(" You only have 3 options which are svg, dot and fig in the file types")
 
@@ -96,6 +115,8 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         print(self.__json.get_help_text('uml_diagram'))
 
     def do_extractData(self, args):
+        """This can load a cmd interface file and extract data from it"""
+
         ExtractData().get_data(args)
 
     def help_extractData(self):
@@ -114,6 +135,8 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         print(self.__json.get_help_text('ValidateData'))
 
     def do_bar_chart(self, args):
+        """input a full path of your file, then the programme can generate a bar chart
+        which shows a number of package used and  a numbe of features in your cmd file """
         try:
             path = True
             ExtractData().get_data(args)
@@ -135,6 +158,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
 
         return True
 
+
     def do_save_data(self, args):
         """this can save data to MySql database.
         please make sure your Mysql have a database which is
@@ -148,6 +172,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
             path = False
         return path
 
+
     def do_load_data(self, args):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
@@ -156,6 +181,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
             LinkDb().load_mysql_data()
         except:
             raise FileNotFoundError("cannot load data from the database")
+
 
     def do_printFile(self, path):
         """Takes one parameter: file path. Takes a file and then prints it to the console"""
