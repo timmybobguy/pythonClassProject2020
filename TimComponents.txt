@@ -1,0 +1,55 @@
+Components worked on by Tim:
+
+1. Sqlite (sqlite.py, ppp_cmd.py)
+    Robustness:
+        The sqlite functionality was reasonably robust, it could handle not having a sqlite file etc.
+    Implementation:
+        The implementation in ppp_cmd.py was okay, it was implemented in testing functions but not as
+        proper functionality of the program. Would have liked to have an option for other commands when
+        generating diagrams etc. to have an option to save to database
+
+2. MySql (mysql.py, ppp_cmd.py)
+    Robustness:
+
+    Implementation:
+
+3. Extract data
+    Robustness:
+
+    Implementation:
+
+4. Deal with file directory
+    Robustness:
+
+    Implementation:
+
+5. Command line args
+    Robustness:
+
+    Implementation:
+
+6. Command line interface
+    Robustness:
+
+    Implementation:
+
+7. Exceptions and error handling
+    Robustness:
+
+    Implementation:
+
+8. Unit testing
+    Robustness:
+
+    Implementation:
+
+9. Display command help
+    Robustness:
+
+    Implementation:
+
+10. Change commands and options
+    Robustness:
+
+    Implementation:
+

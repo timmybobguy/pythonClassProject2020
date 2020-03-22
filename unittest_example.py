@@ -4,7 +4,7 @@ import unittest
 from checkfiles import CheckDirectory
 from validate_data import ValidateData
 from mysql_example import LinkDb
-from ppp_cmd import*
+from ppp_cmd import *
 
 
 class ExampleTest(unittest.TestCase):
@@ -66,12 +66,6 @@ class ExampleTest(unittest.TestCase):
     def test_true_do_save_data(self):
         result = CLI().do_save_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
         self.assertTrue(result)
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
