@@ -1,0 +1,32 @@
+Commands:
+
+    getAllSourceFiles:
+        Displays and optionally generates diagrams for all source code files in a directory
+
+    Syntax:
+
+        getAllSourceFiles FOLDERPATH [-a: svg, dot, fig]
+
+            FOLDERPATH: path to directory
+            -a: generate diagrams for all files with specified output type
+
+    uml_diagram:
+        Generates a uml diagram from a file path with an output file type
+
+    Syntax:
+
+        uml_diagram FILEPATH diagramOption
+
+            FILEPATH: path to source code file
+            diagramOption: option for file output
+
+    bar_chart:
+        Takes a file path and displays a bar chart with number of packages used and features used
+
+    Syntax:
+
+        bar_chart FILEPATH
+
+            FILEPATH: path to source code file
+
+    

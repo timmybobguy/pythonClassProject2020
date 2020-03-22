@@ -75,7 +75,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             else:
                 print("Directory not valid")
 
-
     def help_getAllSourceFiles(self):
         print(self.__json.get_help_text('getAllSourceFiles'))
 
@@ -199,14 +198,14 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             path = False
         return path
 
-    def do_load_data(self, args):
+    def do_load_data(self):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
          passwd="1234", database="class"""
         try:
             LinkDb().load_mysql_data()
-        except:
-            raise FileNotFoundError("cannot load data from the database")
+        except FileNotFoundError:
+            print("cannot load data from the database")
 
     def do_printFile(self, path):
         """Takes one parameter: file path. Takes a file and then prints it to the console"""
@@ -244,17 +243,12 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
             print("Wrong num of args, please try again")
 
-    def do_saveDOTtoDatabase(self, args):
+    def do_saveDOTtoDatabase(self):
         """Saves a file to the database server"""
         saveFileToLocalDatabase("Components.txt")
 
     def do_getFileFromLocalDatabase(self, args):
         getFileFromLocalDatabase(args)
-
-    def do_testGraph(self, args):
-        # This is hard coded at the moment, need to change paths etc.
-        command = 'dot -Tpng classes_componentplain.dot -o ' + args
-        subprocess.call(command)
 
     async def do_testSaveToDatabaseServer(self, args):
         loop = asyncio.get_event_loop()
