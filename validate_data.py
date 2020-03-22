@@ -4,6 +4,7 @@ import pycodestyle
 import pep8
 import subprocess
 import os
+# Wu, Chieh-Ming (Jimmy's work)
 
 
 class ValidateData:
@@ -20,13 +21,11 @@ class ValidateData:
             raise FileNotFoundError("You should input a correct path")
 
 
-
-
-
+"""
 if __name__ == '__main__':
     ValidateData().check_file("fihguhfidu")
 
-
+"""
 
 
 

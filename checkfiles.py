@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import subprocess
+# Wu, Chieh-Ming (Jimmy's work)
 
 
 class CheckDirectory:
@@ -22,6 +23,7 @@ class CheckDirectory:
             file = "*.py"
 
             return file
+
 
 """
         command = "pyreverse {0} -o {1} -p diagram".format(file, file_type)
