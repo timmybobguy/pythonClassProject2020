@@ -1,7 +1,6 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 # -*- coding: utf-8 -*-
 import unittest
-from example import func1, func2
 from checkfiles import CheckDirectory
 from validate_data import ValidateData
 from mysql_example import LinkDb
