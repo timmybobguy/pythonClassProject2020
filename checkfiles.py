@@ -23,6 +23,7 @@ class CheckDirectory:
 
             return file
 
+
 """
         command = "pyreverse {0} -o {1} -p diagram".format(file, file_type)
         print("input_dir:{0} input_file:{1}".format(work_dir, file))

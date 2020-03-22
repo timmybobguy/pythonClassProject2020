@@ -42,8 +42,8 @@ class LinkDb:
                     sql = "INSERT INTO content (packages, features) VALUES (%s, %s)"
                     val = (f, d)
                     cursor.execute(sql, val)
-            mydb.commit()
-            db.commit()
+                mydb.commit()
+                #db.commit()
 
         except:
             mydb.rollback()

@@ -20,13 +20,11 @@ class ValidateData:
             raise FileNotFoundError("You should input a correct path")
 
 
-
-
-
+"""
 if __name__ == '__main__':
     ValidateData().check_file("fihguhfidu")
 
-
+"""
 
 
 

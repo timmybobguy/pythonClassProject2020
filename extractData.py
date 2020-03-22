@@ -43,6 +43,8 @@ class ExtractData:
         data = [num1, num2]
         plt.bar(['Features', 'packages used'], data)
         plt.show()
+
+
 """
 if __name__ == '__main__':
     ExtractData().get_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')

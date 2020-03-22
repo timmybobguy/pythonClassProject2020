@@ -17,7 +17,6 @@ from mysql_example import LinkDb
 from checkfiles import CheckDirectory
 
 
-
 class CLI(cmd.Cmd):
 
     def __init__(self):
@@ -30,9 +29,7 @@ class CLI(cmd.Cmd):
         self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
 
-    def do_shelve(self, cmd_file):
-        """Object-persistence - shelve. The user need to input a full path of cmd interface file,
-        then the programme will catch used packages"""
+    def do_shelve(self,cmd_file):
         file_name = CheckDirectory.check_file(self, cmd_file)
         print(file_name)
         file = open(file_name)
@@ -55,14 +52,13 @@ class CLI(cmd.Cmd):
         """leave the programme"""
         return True
 
-
     def do_uml_diagram(self, args):
         """PLEASE input full path and can have
          options on two different diagram types """
         raw_data = args.split()
+        input_file = raw_data[0]
+        file_type = raw_data[1]
         try:
-                input_file = raw_data[0]
-                file_type = raw_data[1]
                 os.path.isdir(input_file)
                 os.path.isfile(input_file)
                 work_dir = os.path.dirname(input_file)
@@ -126,7 +122,6 @@ class CLI(cmd.Cmd):
 
         return True
 
-
     def do_save_data(self, args):
         """this can save data to MySql database.
         please make sure your Mysql have a database which is
@@ -140,7 +135,6 @@ class CLI(cmd.Cmd):
             path = False
         return path
 
-
     def do_load_data(self, args):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
@@ -149,7 +143,6 @@ class CLI(cmd.Cmd):
             LinkDb().load_mysql_data()
         except:
             raise FileNotFoundError("cannot load data from the database")
-
 
     def do_printFile(self, path):
         """Takes one parameter: file path. Takes a file and then prints it to the console"""
@@ -199,13 +192,11 @@ class CLI(cmd.Cmd):
         command = 'dot -Tpng classes_componentplain.dot -o ' + args
         subprocess.call(command)
 
-
     def convertToBinaryData(filename):
         # Convert digital data to binary format
         with open(filename, 'rb') as file:
             blobData = file.read()
         return blobData
-
 
     def saveFileToLocalDatabase(path):
         conn = MySqlite()
