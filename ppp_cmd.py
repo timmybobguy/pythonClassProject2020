@@ -11,14 +11,30 @@ from datetime import datetime
 from extractData import ExtractData
 from validate_data import ValidateData
 from mysql_example import LinkDb
+from checkfiles import CheckDirectory
+import re
+import shelve
 
 
 class CLI(cmd.Cmd):
+
 
     def __init__(self):
         cmd.Cmd.__init__(self)
         self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
+
+    def do_shelve(self,cmd_file):
+        file_name = CheckDirectory.check_file(self, cmd_file)
+        print(file_name)
+        file = open(file_name)
+        file1 = file.read()
+        imp = re.findall(r"import\s\w+", file1, re.S)
+        s = shelve.open("test")
+        s['package'] = imp
+        print(s['package'])
+        s.close()
+
 
     def do_choose_system(self, arg):
         """ please input -w or -m  to tell us your operation system, Windows or Mac"""
