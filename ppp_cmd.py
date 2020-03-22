@@ -30,10 +30,6 @@ class CLI(cmd.Cmd):
     def do_exit(self, *args):
         return True
 
-    def do_EOF(self, args):
-        """Exit on system end of file character"""
-        return self.do_exit(args)
-
 
     def do_uml_diagram(self, args):
         """PLASE input full path and can have
