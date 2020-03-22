@@ -24,7 +24,9 @@ class CLI(cmd.Cmd):
         self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
 
-    def do_shelve(self,cmd_file):
+    def do_shelve(self, cmd_file):
+        """please input a cmd interface file, then this programme
+        tell you which packages were used in the file """
         file_name = CheckDirectory.check_file(self, cmd_file)
         print(file_name)
         file = open(file_name)
@@ -99,7 +101,7 @@ class CLI(cmd.Cmd):
 
     def do_bar_chart(self, args):
         """input a full path of your file, then the programme can generate a bar chart
-        which shows a number of package used and  a numbe of features in your cmd file """
+        which shows a number of package used and  a number of features in your cmd file """
         try:
             path = True
             ExtractData().get_data(args)

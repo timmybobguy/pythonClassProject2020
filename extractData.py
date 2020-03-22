@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pandas import Series, DataFrame
 from checkfiles import CheckDirectory
+# Wu, Chieh-Ming (Jimmy's work)
 
 
 class ExtractData:

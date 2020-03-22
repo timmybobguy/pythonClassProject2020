@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import doctest
 from checkfiles import CheckDirectory
+# Wu, Chieh-Ming (Jimmy's work)
 
 
 def CheckDirectory(path):
