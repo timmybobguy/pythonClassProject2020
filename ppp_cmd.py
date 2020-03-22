@@ -18,7 +18,9 @@ from mysql import MySQL
 import cmdAdapter
 import asyncio
 from jsonTesting import JsonData
+from argparse import ArgumentParser
 
+os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
 class CustomStream(object):
     async def readline(self):
@@ -39,7 +41,7 @@ MyAsyncShell = type('MyAsyncShell', (cmd.Cmd,), {
 })
 
 
-class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
+class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
     def __init__(self):
         cmd.Cmd.__init__(self)
@@ -49,7 +51,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         json.open_file()
         self.__json = json
 
-    def do_shelve(self,cmd_file):
+    def do_shelve(self, cmd_file):
         file_name = CheckDirectory.check_file(self, cmd_file)
         print(file_name)
         file = open(file_name)
@@ -59,7 +61,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
         s['package'] = imp
         print(s['package'])
         s.close()
-
 
     def do_choose_system(self, arg):
         """ please input -w or -m  to tell us your operation system, Windows or Mac"""
@@ -74,7 +75,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
     def do_exit(self, *args):
         """leave the programme"""
         return True
-
 
     def do_uml_diagram(self, args):
         """PLEASE input full path and can have
@@ -158,7 +158,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
 
         return True
 
-
     def do_save_data(self, args):
         """this can save data to MySql database.
         please make sure your Mysql have a database which is
@@ -172,7 +171,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
             path = False
         return path
 
-
     def do_load_data(self, args):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
@@ -181,7 +179,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged
             LinkDb().load_mysql_data()
         except:
             raise FileNotFoundError("cannot load data from the database")
-
 
     def do_printFile(self, path):
         """Takes one parameter: file path. Takes a file and then prints it to the console"""
@@ -316,8 +313,26 @@ async def saveFileToDatabaseServer(path):
         await conn.close_connection()
 
 
+def add_args():
+    parser = ArgumentParser()
+    parser.add_argument("-s", "--SourceCodePath", help="path to input source code file")
+    parser.add_argument("-f", "--FileType", help="set output file type"
+                                                 "supported file types: svg, dot, fig")
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
     # CLI().cmdloop()
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(CLI().cmdloop())
-    loop.close()
+    # -s C:/Users/TimDesk/PycharmProjects/pythonClassProject2020/test4.py -f svg (EXAMPLE command line args)
+
+    args = add_args()
+
+    if args.SourceCodePath and args.FileType:
+
+        CLI.do_uml_diagram("", "{}".format(args.SourceCodePath) + " {}".format(args.FileType))
+
+    else:
+
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(CLI().cmdloop())
+        loop.close()
