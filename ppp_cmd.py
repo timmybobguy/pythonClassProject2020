@@ -41,7 +41,6 @@ class CLI(cmd.Cmd):
         try:
                 os.path.isdir(input_file)
                 os.path.isfile(input_file)
-                os.path.exists(filepath)
                 work_dir = os.path.dirname(input_file)
                 file = input_file[len(work_dir) + 1:]
         except:
