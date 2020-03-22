@@ -11,6 +11,9 @@ class MySqlite:
     def connection(self):
         return self.__connection
 
+    def cursor(self):
+        return self.__cursor
+
     def close_connection(self):
         self.__connection.close()
         print("DB connection closed...")

@@ -1,13 +1,10 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 # -*- coding: utf-8 -*-
 import os
-import sys
 import cmd
 import ast
 import pylint
 import subprocess
-import re
-import shelve
 from os import environ, pathsep
 from sqlite import MySqlite
 from datetime import datetime
@@ -15,17 +12,15 @@ from extractData import ExtractData
 from validate_data import ValidateData
 from mysql_example import LinkDb
 from checkfiles import CheckDirectory
+import re
+import shelve
 
 
 class CLI(cmd.Cmd):
 
+
     def __init__(self):
         cmd.Cmd.__init__(self)
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        pyreverse_path = os.path.join(dir_path, "/pythonClassProject2020/bin")
-        print("Your current folder is: " + dir_path)
-        os.environ["PATH"] += os.pathsep + os.pathsep.join(pyreverse_path)
-
         self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
 
@@ -51,6 +46,7 @@ class CLI(cmd.Cmd):
     def do_exit(self, *args):
         """leave the programme"""
         return True
+
 
     def do_uml_diagram(self, args):
         """PLEASE input full path and can have
@@ -122,6 +118,7 @@ class CLI(cmd.Cmd):
 
         return True
 
+
     def do_save_data(self, args):
         """this can save data to MySql database.
         please make sure your Mysql have a database which is
@@ -135,6 +132,7 @@ class CLI(cmd.Cmd):
             path = False
         return path
 
+
     def do_load_data(self, args):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
@@ -143,6 +141,7 @@ class CLI(cmd.Cmd):
             LinkDb().load_mysql_data()
         except:
             raise FileNotFoundError("cannot load data from the database")
+
 
     def do_printFile(self, path):
         """Takes one parameter: file path. Takes a file and then prints it to the console"""
@@ -192,11 +191,13 @@ class CLI(cmd.Cmd):
         command = 'dot -Tpng classes_componentplain.dot -o ' + args
         subprocess.call(command)
 
+
     def convertToBinaryData(filename):
         # Convert digital data to binary format
         with open(filename, 'rb') as file:
             blobData = file.read()
         return blobData
+
 
     def saveFileToLocalDatabase(path):
         conn = MySqlite()

@@ -4,7 +4,7 @@ import unittest
 from checkfiles import CheckDirectory
 from validate_data import ValidateData
 from mysql_example import LinkDb
-from ppp_cmd import*
+from ppp_cmd import *
 
 
 class ExampleTest(unittest.TestCase):

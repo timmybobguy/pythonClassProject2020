@@ -28,12 +28,30 @@ class MySQL:
     async def close_cursor(self):
         await self.__cursor.close()
 
+    async def process_query(self, query):
+        await self.__cursor.execute(query)
+        return f'Query "{query}" processed!'
 
-async def testing_connection(loop):
+    async def insert_records(self, query, data):
+        return await self.__cursor.executemany(query, data)
+
+    async def fetch_all_records(self, query):
+        await self.process_query(query)
+        return await self.__cursor.fetchall()
+
+    async def fetch_one(self, query):
+        await self.process_query(query)
+        return await self.__cursor.fetchone()
+
+    def execute_blob(self, sql, data):
+        self.__cursor.process_query(sql, [sqlite3.Binary(data)])
+
+
+async def testing_connection():
     db_config = {
         'host': 'localhost',
         'user': 'root',
-        'password': ''
+        'password': 'root'
     }
 
     mysql = MySQL()
@@ -46,14 +64,14 @@ async def testing_connection(loop):
         print(err)
 
 
-async def main(loop):
-    await testing_connection(loop)
+async def main():
+    await testing_connection()
 
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
 
-    result = loop.run_until_complete(main(loop))
+    result = loop.run_until_complete(main())
     print(result)
 
     loop.close()

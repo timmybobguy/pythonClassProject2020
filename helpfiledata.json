@@ -1,0 +1,57 @@
+{
+
+  "helpText": [
+
+    {
+      "functionName": "choose_system",
+      "helpText" : "please input -w or -m  to tell us your operation system, Windows or Mac"
+    },
+
+    {
+      "functionName": "extractData",
+      "helpText" : "This can load a cmd interface file and extract data from it"
+    },
+
+    {
+      "functionName": "ValidateData",
+      "helpText" : "This can validate your code in order to pass pep8"
+    },
+
+    {
+      "functionName": "bar_chart",
+      "helpText" : "input a full path of your file, then the programme can generate a bar chart\n        which shows a number of package used and  a numbe of features in your cmd file"
+    },
+
+    {
+      "functionName": "getAllSourceFiles",
+      "helpText" : "Takes a directory path, and optionally -a with an output file type (SVG, FIG or DOT) to turn all source code files found into diagrams"
+    },
+
+    {
+      "functionName": "",
+      "helpText" : ""
+    },
+
+    {
+      "functionName": "",
+      "helpText" : ""
+    },
+
+    {
+      "functionName": "",
+      "helpText" : ""
+    },
+
+    {
+      "functionName": "",
+      "helpText" : ""
+    },
+
+    {
+      "functionName": "uml_diagram",
+      "helpText" : "PLEASE input full path and can have\n         options on two different diagram types"
+    }
+
+  ]
+
+}
