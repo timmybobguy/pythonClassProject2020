@@ -27,14 +27,8 @@ class CLI(cmd.Cmd):
         elif arg == "-m":
             print('Mac lover')
 
-    def do_exit(self, args):
-        """Exits from the console"""
-        exit()
-
-
-    def do_EOF(self, args):
-        """Exit on system end of file character"""
-        return self.do_exit(args)
+    def do_exit(self, *args):
+        return True
 
 
     def do_uml_diagram(self, args):
@@ -79,40 +73,53 @@ class CLI(cmd.Cmd):
         ExtractData().get_data(args)
 
     def do_ValidateData(self,args):
-        "input a full path of your file, then the programme can check your file weather pass pep8 or not"
+        """This can validate your code in order to pass pep8"""
         try:
+            path = True
             ValidateData().check_file(args)
         except:
             print("wrong path, try again")
+            path = False
+        return path
 
     def do_bar_chart(self, args):
         """input a full path of your file, then the programme can generate a bar chart
         which shows a number of package used and  a numbe of features in your cmd file """
-        ExtractData().get_data(args)
-        ExtractData().draw_bar_chart()
-
-    def do_mySql(self, arg):
-        """this can check weather the db links """
         try:
-            link_db().check_link_db()
+            path = True
+            ExtractData().get_data(args)
+            ExtractData().draw_bar_chart()
         except:
             print("wrong path, try again")
+            path = False
+        return path
+
+    def do_mySql(self,arg):
+        """this can check weather the db links """
+
+        link_db().check_link_db()
+
+        return True
+
 
     def do_save_data(self, args):
         """this can save data to MySql database"""
         try:
+            path = True
             link_db().get_file(args)
             link_db().link_mysql_save()
         except:
             print("wrong path, try again")
+            path = False
+        return path
 
 
-    def do_load_data(self, arg):
+    def do_load_data(self, args):
          """this can laod data from MySql database"""
          try:
              link_db().load_mysql_data()
          except:
-             print("wrong path, try again")
+             raise FileNotFoundError("cannot load data from the database")
 
 
     def do_printFile(self, path):
