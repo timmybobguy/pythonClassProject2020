@@ -10,43 +10,50 @@ Components worked on by Tim:
 
 2. MySql (mysql.py, ppp_cmd.py)
     Robustness:
-
+        The mysql functionality is not that robust, because the implementation wasn't working well.
     Implementation:
         Had issues implementing this component into the CMD class as I needed to be able to await some
         of the functions when interacting with the database server
 
 3. Extract data
     Robustness:
-        My json
+        My json extra data function is reasonably robust and can handle the file not being there to read.
     Implementation:
+        I was happy with the implementation of this component, nothing I would do differently
 
 4. Deal with file directory
     Robustness:
-
+        I think this functionality was reasonably robust and can handle exceptions and bad inputs
     Implementation:
+        I think the implementation could be improved if the functionality of our project was more
+        streamlined, it would have been better to include more options for the function
 
 5. Command line args
     Robustness:
-
+        I think the robustness of the component was alright but this is mainly because the functionality
+        of it is less than I would like.
     Implementation:
+        I have implemented this component but only to a very simple extent. The command line args supported are just for
+        a basic create diagram/dot file
 
 6. Command line interface
     Robustness:
-
+        I think that most of the functions in the CLI are reasonably robust, but some need improvement and cannot handle
+        exceptions.
     Implementation:
+        I think that there are too many functions in the CLI and they need to be simplified and combined for a better
+        implementation.
 
 7. Exceptions and error handling
     Robustness:
-
+        Exception and error handling is a very robust technique, I think I did a reasonable job but could be improved as
+        not all functions have been handled.
     Implementation:
+        I think the implementation was reasonably good.
 
 8. Unit testing
     Robustness:
-
+        Component is robust.
     Implementation:
-
-9. Display command help
-    Robustness:
-
-    Implementation:
+        I created a number of tests for each function I had worked on in the project, this went reasonably well.
 

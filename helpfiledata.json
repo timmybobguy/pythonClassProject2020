@@ -28,8 +28,8 @@
     },
 
     {
-      "functionName": "",
-      "helpText" : ""
+      "functionName": "generatePieChart",
+      "helpText" : "This function takes a path to .py source code then generates a pie chart with number of classes functions etc."
     },
 
     {

@@ -14,11 +14,13 @@ from mysql_example import LinkDb
 from checkfiles import CheckDirectory
 import re
 import shelve
-from mysql import MySQL
+# from mysql import MySQL
 import cmdAdapter
 import asyncio
 from jsonTesting import JsonData
 from argparse import ArgumentParser
+import re
+from pieChart import CreatePieChart
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 
@@ -49,7 +51,10 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         self.prompt = "==>>>"
         self.intro = "This program can generate class diagrams from your source codes, type help for a list of commands"
         json = JsonData('helpfiledata.json')
-        json.open_file()
+        try:
+            json.open_file()
+        except FileNotFoundError:
+            print('Help data file cannot be opened...')
         self.__json = json
 
     def do_getAllSourceFiles(self, arg):
@@ -237,18 +242,19 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
                 print("No file found at: '" + arguments[0] + "'")
 
             command = 'pyreverse -o dot ' + arguments[0] + ' -p componentplain '
-            subprocess.call(command)
+            return subprocess.call(command)
+
 
         else:
 
             print("Wrong num of args, please try again")
 
-    def do_saveDOTtoDatabase(self):
+    def do_saveFiletoLocalDatabase(self, arg):
         """Saves a file to the database server"""
-        saveFileToLocalDatabase("Components.txt")
+        saveFileToLocalDatabase(arg)
 
-    def do_getFileFromLocalDatabase(self, args):
-        getFileFromLocalDatabase(args)
+    def do_getFileFromLocalDatabase(self, arg):
+        getFileFromLocalDatabase(arg)
 
     async def do_testSaveToDatabaseServer(self, args):
         loop = asyncio.get_event_loop()
@@ -257,6 +263,46 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         print(result)
 
         loop.close()
+
+    def do_generatePieChart(self, file):
+
+        try:
+            with open(file, 'r') as file:
+                file_data = file.read().replace('\n', '')
+        except FileNotFoundError:
+            print("No such file found")
+
+        else:
+            num_classes = 0
+            num_functions = 0
+            num_attribute = 0
+
+            regex = r"class"
+
+            matches = re.finditer(regex, file_data, re.MULTILINE)
+            for _ in matches:
+                num_classes += 1
+
+            regex = r"def"
+
+            matches = re.finditer(regex, file_data, re.MULTILINE)
+            for _ in matches:
+                num_functions += 1
+
+            regex = r"self.*="
+
+            matches = re.finditer(regex, file_data, re.MULTILINE)
+
+            for _ in matches:
+                num_attribute += 1
+
+            labels = 'Classes', 'Functions', 'Attributes'
+            sizes = [num_classes, num_functions, num_attribute]
+            pie = CreatePieChart(labels, sizes)
+            pie.generate_pie_chart()
+
+    def help_generatePieChart(self):
+        print(self.__json.get_help_text('generatePieChart'))
 
 
 async def saveServer():
