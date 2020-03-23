@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import subprocess
+import doctest
 # Wu, Chieh-Ming (Jimmy's work)
 
 
@@ -11,6 +12,11 @@ class CheckDirectory:
         pass
 
     def check_file(self, input_file):
+        """
+        >>> a = CheckDirectory()
+        >>> a.check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+        'run_cmd.py'
+        """
 
         if os.path.isfile(input_file):
             work_dir = os.path.dirname(input_file)
@@ -32,5 +38,6 @@ class CheckDirectory:
        subprocess.run(command, cwd=work_dir, shell=True)
 """
 
-
+if __name__ == '__main__':
+    doctest.testmod()
 

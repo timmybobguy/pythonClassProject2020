@@ -203,7 +203,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             path = False
         return path
 
-    def do_load_data(self):
+    def do_load_data(self, arg):
         """This can laod data from MySql database.
          please make sure your Mysql have a database which is host="127.0.0.1", user="root",
          passwd="1234", database="class"""

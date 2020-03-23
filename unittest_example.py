@@ -4,7 +4,8 @@ import unittest
 from checkfiles import CheckDirectory
 from validate_data import ValidateData
 from mysql_example import LinkDb
-from ppp_cmd import *
+from ppp_cmd import*
+
 # Wu, Chieh-Ming (Jimmy's work)
 
 
@@ -26,12 +27,12 @@ class ExampleTest(unittest.TestCase):
 
     def test_correct_path_validate_data(self):
 
-        result = CLI().do_ValidateData('/Users/jimmy/py/pythonClassProject2020/test3.py')
+        result = CLI().do_validate_data('/Users/jimmy/py/pythonClassProject2020/test3.py')
         self.assertTrue(result)
 
     def test_wrong_path_validate_data(self):
 
-        result = CLI().do_ValidateData('This is Jimmy')
+        result = CLI().do_validate_data('This is Jimmy')
         self.assertFalse(result)
 
     def test_correct_do_bar_chart(self):
