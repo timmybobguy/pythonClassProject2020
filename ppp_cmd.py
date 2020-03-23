@@ -27,6 +27,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 pyreverse_path = os.path.join(dir_path, "/pythonClassProject2020/bin")
 os.environ["PATH"] += os.pathsep + os.pathsep.join(pyreverse_path)
 
+
 class CustomStream(object):
     async def readline(self):
         return await sys.stdin.readline()
