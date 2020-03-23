@@ -14,7 +14,7 @@ from mysql_example import LinkDb
 from checkfiles import CheckDirectory
 import re
 import shelve
-# from mysql import MySQL
+from mysql import MySQL
 import cmdAdapter
 import asyncio
 from jsonTesting import JsonData
