@@ -304,7 +304,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
                 labels = 'Classes', 'Functions', 'Attributes'
                 sizes = [num_classes, num_functions, num_attribute]
-                pie = CreatePieChart(labels, sizes)
+                pie = CreatePieChart(labels, sizes, file)
                 pie.generate_pie_chart()
 
     def help_generate_pie_chart(self):
