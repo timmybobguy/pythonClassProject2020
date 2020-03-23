@@ -57,3 +57,8 @@ Components worked on by Tim:
     Implementation:
         I created a number of tests for each function I had worked on in the project, this went reasonably well.
 
+9. Pretty print (Pie chart)
+    Robustness:
+        Component is very robust, can handle any input to function
+    Implementation:
+        Implementation is pretty good as well because it uses the pieChart class I created and runs the script well

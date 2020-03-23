@@ -273,33 +273,39 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             print("No such file found")
 
         else:
-            num_classes = 0
-            num_functions = 0
-            num_attribute = 0
 
-            regex = r"class"
+            ext = os.path.splitext(file.name)[1]  # [0] returns path+filename
+            valid_extensions = ['.py']
+            if not ext.lower() in valid_extensions:
+                print('Unsupported file extension, only accepts .py files')
+            else:
+                num_classes = 0
+                num_functions = 0
+                num_attribute = 0
 
-            matches = re.finditer(regex, file_data, re.MULTILINE)
-            for _ in matches:
-                num_classes += 1
+                regex = r"class"
 
-            regex = r"def"
+                matches = re.finditer(regex, file_data, re.MULTILINE)
+                for _ in matches:
+                    num_classes += 1
 
-            matches = re.finditer(regex, file_data, re.MULTILINE)
-            for _ in matches:
-                num_functions += 1
+                regex = r"def"
 
-            regex = r"self.*="
+                matches = re.finditer(regex, file_data, re.MULTILINE)
+                for _ in matches:
+                    num_functions += 1
 
-            matches = re.finditer(regex, file_data, re.MULTILINE)
+                regex = r"self.*="
 
-            for _ in matches:
-                num_attribute += 1
+                matches = re.finditer(regex, file_data, re.MULTILINE)
 
-            labels = 'Classes', 'Functions', 'Attributes'
-            sizes = [num_classes, num_functions, num_attribute]
-            pie = CreatePieChart(labels, sizes)
-            pie.generate_pie_chart()
+                for _ in matches:
+                    num_attribute += 1
+
+                labels = 'Classes', 'Functions', 'Attributes'
+                sizes = [num_classes, num_functions, num_attribute]
+                pie = CreatePieChart(labels, sizes)
+                pie.generate_pie_chart()
 
     def help_generatePieChart(self):
         print(self.__json.get_help_text('generatePieChart'))
