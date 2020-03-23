@@ -23,7 +23,9 @@ import re
 from pieChart import CreatePieChart
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
-
+dir_path = os.path.dirname(os.path.realpath(__file__))
+pyreverse_path = os.path.join(dir_path, "/pythonClassProject2020/bin")
+os.environ["PATH"] += os.pathsep + os.pathsep.join(pyreverse_path)
 
 class CustomStream(object):
     async def readline(self):
@@ -84,6 +86,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         print(self.__json.get_help_text('getAllSourceFiles'))
 
     def do_shelve(self, cmd_file):
+        """input an absoluat"""
         file_name = CheckDirectory.check_file(self, cmd_file)
         print(file_name)
         file = open(file_name)

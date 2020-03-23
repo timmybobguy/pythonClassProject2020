@@ -38,11 +38,10 @@ class LinkDb:
         sql_table = ("CREATE TABLE content ( packages VARCHAR(25), features VARCHAR(25))")
         try:
             cursor.execute(sql_table)
-            for d in self.func_all:
-                for f in self.imp_arr:
-                    sql = "INSERT INTO content (packages, features) VALUES (%s, %s)"
-                    val = (f, d)
-                    cursor.execute(sql, val)
+            for d, f in zip(self.func_all,self.imp_arr):
+                sql = "INSERT INTO content (packages, features) VALUES (%s, %s)"
+                val = (f, d)
+                cursor.execute(sql, val)
                 mydb.commit()
                 #db.commit()
 
@@ -84,5 +83,4 @@ if __name__ == '__main__':
     LinkDb().link_mysql_save()
     LinkDb().load_mysql_data()
     LinkDb().check_link_db()
-
 """
