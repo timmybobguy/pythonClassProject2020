@@ -73,13 +73,11 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
                         files.append(os.path.join(arguments[0], file))
 
                 if len(arguments) == 3 and arguments[1] == "-a":
-                    if arguments[2] == "svg" or "dot" or "fig":
+                    if arguments[2] == "svg" or arguments[2] == "dot" or arguments[2] == "fig":
                         for file in files:
                             self.do_uml_diagram(file + " " + arguments[2])
                     else:
                         print("Incorrect output format entered")
-                else:
-                    print("Please enter the correct number of args, see help for more information")
             else:
                 print("Directory not valid")
 
