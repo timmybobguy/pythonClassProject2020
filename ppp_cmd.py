@@ -21,6 +21,8 @@ from jsonTesting import JsonData
 from argparse import ArgumentParser
 import re
 from pieChart import CreatePieChart
+from director import Director
+
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -109,7 +111,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         print(self.__json.get_help_text('choose_system'))
 
     def do_exit(self, *args):
-        """leave the programme"""
+        """leave this programme"""
         return True
 
     def do_uml_diagram(self, args):
@@ -172,15 +174,13 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
     def do_bar_chart(self, args):
         """input a full path of your file, then the programme can generate a bar chart
-        which shows a number of package used and  a numbe of features in your cmd file """
-        try:
-            path = True
-            ExtractData().get_data(args)
-            ExtractData().draw_bar_chart()
-        except Exception as err:
-            print(err)
-            path = False
-        return path
+        which shows a number of package used and  a number of features in your cmd file """
+
+        director1 = Director()
+        director1.director()
+
+
+
 
     def help_bar_chart(self):
         print(self.__json.get_help_text('bar_chart'))
@@ -397,6 +397,8 @@ def add_args():
     parser.add_argument("-f", "--FileType", help="set output file type"
                                                  "supported file types: svg, dot, fig")
     return parser.parse_args()
+
+
 
 
 if __name__ == '__main__':

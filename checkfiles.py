@@ -14,8 +14,8 @@ class CheckDirectory:
     def check_file(self, input_file):
         """
         >>> a = CheckDirectory()
-        >>> a.check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
-        'run_cmd.py'
+        >>> a.check_file('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
+        'ppp_cmd.py'
         """
 
         if os.path.isfile(input_file):

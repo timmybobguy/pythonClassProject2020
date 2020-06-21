@@ -36,7 +36,7 @@ class ExampleTest(unittest.TestCase):
         self.assertFalse(result)
 
     def test_correct_do_bar_chart(self):
-        result = CLI().do_bar_chart('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+        result = CLI().do_bar_chart('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
         self.assertTrue(result)
 
     def test_wrong_do_bar_chart(self):
@@ -45,7 +45,7 @@ class ExampleTest(unittest.TestCase):
 
     def test_correct_input_do_bar_chart(self):
         try:
-            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
+            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
             self.assertIsInstance(result, str)
         except WrongInputException:
             self.fail()
@@ -65,9 +65,6 @@ class ExampleTest(unittest.TestCase):
         result = CLI().do_save_data('1234')
         self.assertFalse(result)
 
-    def test_true_do_save_data(self):
-        result = CLI().do_save_data('/Users/jimmy/py/pythonClassProject2020/run_cmd.py')
-        self.assertTrue(result)
 
 
 if __name__ == '__main__':
