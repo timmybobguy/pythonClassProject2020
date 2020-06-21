@@ -7,6 +7,12 @@ class JsonData:
         self.__filePath = path
         self.__helpTextDict = None
 
+    def filePath(self):
+        return self.__filePath
+
+    def helpTextDict(self):
+        return self.__helpTextDict
+
     def get_help_text(self, name):
         for x in self.__helpTextDict['helpText']:
             if x['functionName'] == name:
