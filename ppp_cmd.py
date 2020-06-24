@@ -21,6 +21,7 @@ from jsonTesting import JsonData
 from argparse import ArgumentParser
 import re
 from pieChart import CreatePieChart
+from Builder import Director, ConcreteBuilderPyReverse
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -115,35 +116,19 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
          options on two different diagram types """
         raw_data = args.split()
         input_file = raw_data[0]
-        file_type = raw_data[1]
-        try:
-            os.path.isdir(input_file)
-            os.path.isfile(input_file)
-            work_dir = os.path.dirname(input_file)
-            file = input_file[len(work_dir) + 1:]
+        file_type = raw_data[1:]
 
-        except FileNotFoundError:
+        if not os.path.exists(input_file):
+
             print("wrong path, try again")
 
         else:
 
-            if file_type == 'svg':
-                command = "pyreverse {0} -o svg -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
-            elif file_type == 'fig':
-                command = "pyreverse {0} -o fig -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
-            elif file_type == 'dot':
-                command = "pyreverse {0} -o dot -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
-            else:
-                print(" You only have 3 options which are svg, dot and fig in the file types")
+            director = Director(file_type)
+            builder = ConcreteBuilderPyReverse(input_file)
+            director.builder = builder
+
+            builder.product.run_commands()
 
     def help_uml_diagram(self):
         print(self.__json.get_help_text('uml_diagram'))
@@ -170,7 +155,7 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
     def do_bar_chart(self, args):
         """input a full path of your file, then the programme can generate a bar chart
-        which shows a number of package used and  a numbe of features in your cmd file """
+        which shows a number of package used and  a number of features in your cmd file """
         try:
             path = True
             ExtractData().get_data(args)
