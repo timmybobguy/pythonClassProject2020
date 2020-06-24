@@ -15,11 +15,11 @@ class ConcreteBar(Builder):
     imp = []
     func = []
 
-    def __init__(self):
-        pass
+    def __init__(self, file):
+        super().__init__(file)
 
-    def get_inform(self, cmd_file):
-        file_name = CheckDirectory.check_file(self, cmd_file)
+    def get_inform(self):
+        file_name = CheckDirectory.check_file(self, self.file)
         print(file_name)
         file = open(file_name)
         file1 = file.read()
@@ -46,6 +46,6 @@ class ConcreteBar(Builder):
 
 
 if __name__ == '__main__':
-    Bar = ConcreteBar()
-    Bar.get_inform("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    Bar = ConcreteBar("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    Bar.get_inform()
     Bar.draw()

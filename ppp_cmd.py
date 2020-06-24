@@ -22,7 +22,8 @@ from argparse import ArgumentParser
 import re
 from pieChart import CreatePieChart
 from director import Director
-
+from concreteBar import ConcreteBar
+from concreteTable import ConcreteTable
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -170,16 +171,22 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
     def help_validate_data(self):
         print(self.__json.get_help_text('ValidateData'))
 
-    def do_bar_chart(self, args):
+    def do_chart(self, args):
         """input a full path of your file, then the programme can generate a bar chart
         which shows a number of package used and  a number of features in your cmd file """
-
-        director1 = Director()
-        director1.director()
-
-    def do_table_cahrt(self):
-
-
+        raw_data = args.split()
+        input_file = raw_data[0]
+        chart = raw_data[1]
+        if chart == "-t":
+            Table = ConcreteTable(input_file)
+            Table.get_inform()
+            Table.draw()
+        elif chart == "-b":
+            Bar = ConcreteBar(input_file)
+            Bar.get_inform()
+            Bar.draw()
+        else:
+            print("Please choose a table or bar chart")
 
 
     def help_bar_chart(self):

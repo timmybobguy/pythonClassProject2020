@@ -5,24 +5,17 @@ from concreteTable import ConcreteTable
 from concreteBar import ConcreteBar
 
 
-class Director:
+class Director(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, builder):
+        self.builder = builder
 
-    def director(self):
+    def construct(self):
+        self.builder.get_inform()
+        self.builder.draw()
 
-        builder.get_inform()
-        builder.draw()
 
-
-    """def bar(self, cmd_file):
-        builder1 = ConcreteBar()
-        builder1.get_import(cmd_file)
-        builder1.get_function(cmd_file)
-        builder1.draw()
-
-    def table(self, cmd_file):
-        builder2 = ConcreteTable()
-        builder2.get_inform(cmd_file)
-        builder2.draw()"""
+if __name__ == '__main__':
+ table = ConcreteTable("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+ director = Director(table)
+ director.construct()

@@ -15,11 +15,11 @@ class ConcreteTable(Builder):
     func = []
     all = []
 
-    def __init__(self):
-        pass
+    def __init__(self, file):
+        super().__init__(file)
 
-    def get_inform(self, cmd_file):
-        file_name = CheckDirectory.check_file(self, cmd_file)
+    def get_inform(self):
+        file_name = CheckDirectory.check_file(self, self.file)
         file = open(file_name)
         file1 = file.read()
         obj = re.findall(r"def\sdo\w+", file1, re.S)
@@ -34,6 +34,6 @@ class ConcreteTable(Builder):
         fig.show()
 
 if __name__ == '__main__':
-    Table = ConcreteTable()
-    Table.get_inform("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    Table = ConcreteTable("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    Table.get_inform()
     Table.draw()
