@@ -13,32 +13,27 @@ class ConcreteTable(Builder):
     imp_arr = []
     imp = []
     func = []
+    all = []
 
     def __init__(self):
         pass
 
     def get_inform(self, cmd_file):
         file_name = CheckDirectory.check_file(self, cmd_file)
-        print(file_name)
         file = open(file_name)
         file1 = file.read()
-        imp = re.findall(r"import\s\w+", file1, re.S)
-        func = re.findall(r"def\sdo\w+", file1, re.S)
-
-        for i in func:
+        obj = re.findall(r"def\sdo\w+", file1, re.S)
+        for i in obj:
             j = i.strip('def')
-            self.func_all.append(j)
-        print(self.func_all)
+            print(j)
 
-        for i in imp:
-            j = i.strip('import')
-            self.imp_arr.append(j)
-        print(self.imp_arr)
+            self.all.append(j)
 
     def draw(self):
-        fig = go.Figure(data=[go.Table(header=dict(values=['Functions']),
-
-
-                                       cells=dict(values=[[95, 85, 75, 95]]))
-                              ])
+        fig = go.Figure(data=[go.Table(header=dict(values=['Functions']), cells=dict(values=[self.all]))])
         fig.show()
+
+if __name__ == '__main__':
+    Table = ConcreteTable()
+    Table.get_inform("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    Table.draw()

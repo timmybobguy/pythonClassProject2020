@@ -177,6 +177,8 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         director1 = Director()
         director1.director()
 
+    def do_table_cahrt(self):
+
 
 
 

@@ -43,6 +43,8 @@ class ConcreteBar(Builder):
         plt.bar(['Features', 'packages used'], data)
         plt.show()
 
+
+
 if __name__ == '__main__':
     Bar = ConcreteBar()
     Bar.get_inform("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")

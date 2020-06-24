@@ -7,13 +7,6 @@ class shape:
         pass
 
 
-
-
-
-
-
-
-
 raw_data = args.split()
 input_file = raw_data[0]
 file_type = raw_data[1]

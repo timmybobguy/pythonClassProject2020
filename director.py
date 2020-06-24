@@ -16,9 +16,6 @@ class Director:
         builder.draw()
 
 
-
-
-
     """def bar(self, cmd_file):
         builder1 = ConcreteBar()
         builder1.get_import(cmd_file)
