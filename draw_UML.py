@@ -31,12 +31,37 @@ class SvgSite(Site):
     def get_diagram(self):
         command = "pyreverse {0} -o svg -p diagram".format(self.file)
         return command
-    
+
+
+class FigSite(Site):
+    def __init__(self, file):
+        super().__init__(file)
+
+    def get_diagram(self):
+        command = "pyreverse {0} -o fig -p diagram".format(self.file)
+        return command
+
+
+class DotSite(Site):
+    def __init__(self, file):
+        super().__init__(file)
+
+    def get_diagram(self):
+        command = "pyreverse {0} -o dot -p diagram".format(self.file)
+        return command
 
 
 if __name__ == '__main__':
     svg = SvgSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
     svg.get_diagram()
     svg.run()
+
+    fig = FigSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    fig.get_diagram()
+    fig.run()
+
+    dot = DotSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    dot.get_diagram()
+    dot.run()
 
 
