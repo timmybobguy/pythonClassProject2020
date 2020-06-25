@@ -178,13 +178,14 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         input_file = raw_data[0]
         chart = raw_data[1]
         if chart == "-t":
-            Table = ConcreteTable(input_file)
-            Table.get_inform()
-            Table.draw()
+            table = ConcreteTable(input_file)
+            director = Director(table)
+            director.construct()
+
         elif chart == "-b":
-            Bar = ConcreteBar(input_file)
-            Bar.get_inform()
-            Bar.draw()
+            bar = ConcreteBar(input_file)
+            director = Director(bar)
+            director.construct()
         else:
             print("Please choose a table or bar chart")
 
