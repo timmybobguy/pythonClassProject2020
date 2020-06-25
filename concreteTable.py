@@ -33,7 +33,3 @@ class ConcreteTable(Builder):
         fig = go.Figure(data=[go.Table(header=dict(values=['Functions']), cells=dict(values=[self.all]))])
         fig.show()
 
-if __name__ == '__main__':
-    Table = ConcreteTable("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
-    Table.get_inform()
-    Table.draw()

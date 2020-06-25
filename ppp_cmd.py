@@ -123,8 +123,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         try:
             os.path.isdir(input_file)
             os.path.isfile(input_file)
-            work_dir = os.path.dirname(input_file)
-            file = input_file[len(work_dir) + 1:]
 
         except FileNotFoundError:
             print("wrong path, try again")

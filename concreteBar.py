@@ -44,7 +44,6 @@ class ConcreteBar(Builder):
         plt.show()
 
 
-
 if __name__ == '__main__':
     Bar = ConcreteBar("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
     Bar.get_inform()
