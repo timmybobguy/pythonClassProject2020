@@ -24,6 +24,7 @@ from pieChart import CreatePieChart
 from director import Director
 from concreteBar import ConcreteBar
 from concreteTable import ConcreteTable
+from draw_UML import SvgSite, Site
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -131,10 +132,10 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         else:
 
             if file_type == 'svg':
-                command = "pyreverse {0} -o svg -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
+                svg = SvgSite(input_file)
+                svg.get_diagram()
+                svg.run()
+
             elif file_type == 'fig':
                 command = "pyreverse {0} -o fig -p diagram".format(file)
                 print("input_dir:{0} input_file:{1}".format(work_dir, file))
@@ -172,8 +173,8 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         print(self.__json.get_help_text('ValidateData'))
 
     def do_chart(self, args):
-        """input a full path of your file, then the programme can generate a bar chart
-        which shows a number of package used and  a number of features in your cmd file """
+        """input a full path of your file, then add -t for
+        generate a table or add -b for generate a bar chart"""
         raw_data = args.split()
         input_file = raw_data[0]
         chart = raw_data[1]
@@ -181,7 +182,6 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             table = ConcreteTable(input_file)
             director = Director(table)
             director.construct()
-
         elif chart == "-b":
             bar = ConcreteBar(input_file)
             director = Director(bar)
