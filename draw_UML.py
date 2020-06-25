@@ -21,7 +21,7 @@ class Site(metaclass=ABCMeta):
 
     def run(self):
         p = self.get_diagram()
-        subprocess.run(p, cwd= os.path.dirname(self.file), shell=True)
+        subprocess.run(p, cwd=os.path.dirname(self.file), shell=True)
 
 
 class SvgSite(Site):

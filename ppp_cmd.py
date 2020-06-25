@@ -24,7 +24,7 @@ from pieChart import CreatePieChart
 from director import Director
 from concreteBar import ConcreteBar
 from concreteTable import ConcreteTable
-from draw_UML import SvgSite, Site
+from draw_UML import SvgSite, FigSite, DotSite
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -123,21 +123,20 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         try:
             os.path.isdir(input_file)
             os.path.isfile(input_file)
-
         except FileNotFoundError:
             print("wrong path, try again")
 
         else:
 
-            if file_type == 'svg':
+            if file_type == '-svg':
                 svg = SvgSite(input_file)
                 svg.get_diagram()
                 svg.run()
-            elif file_type == 'fig':
+            elif file_type == '-fig':
                 fig = FigSite(input_file)
                 fig.get_diagram()
                 fig.run()
-            elif file_type == 'dot':
+            elif file_type == '-dot':
                 dot = DotSite(input_file)
                 dot.get_diagram()
                 dot.run()
