@@ -135,17 +135,14 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
                 svg = SvgSite(input_file)
                 svg.get_diagram()
                 svg.run()
-
             elif file_type == 'fig':
-                command = "pyreverse {0} -o fig -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
+                fig = FigSite(input_file)
+                fig.get_diagram()
+                fig.run()
             elif file_type == 'dot':
-                command = "pyreverse {0} -o dot -p diagram".format(file)
-                print("input_dir:{0} input_file:{1}".format(work_dir, file))
-                print("command:" + command)
-                subprocess.run(command, cwd=work_dir, shell=True)
+                dot = DotSite(input_file)
+                dot.get_diagram()
+                dot.run()
             else:
                 print(" You only have 3 options which are svg, dot and fig in the file types")
 
