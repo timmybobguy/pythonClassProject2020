@@ -15,7 +15,3 @@ class Director(object):
         self.builder.draw()
 
 
-if __name__ == '__main__':
- table = ConcreteTable("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
- director = Director(table)
- director.construct()
