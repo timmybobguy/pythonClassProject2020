@@ -47,9 +47,7 @@ class DotSite(Site):
         self.p = "pyreverse {0} -o dot -p diagram".format(self.file)
 
 
-if __name__ == '__main__':
-    svg = SvgSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
-    svg.run_all()
+
 
 
 

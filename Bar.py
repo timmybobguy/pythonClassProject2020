@@ -19,6 +19,11 @@ class ConcreteBar(Builder):
         super().__init__(file)
 
     def get_inform(self):
+        """
+               >>> a = CheckDirectory()
+               >>> a.check_file('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
+               'ppp_cmd.py'
+        """
         file_name = CheckDirectory.check_file(self, self.file)
         print(file_name)
         file = open(file_name)

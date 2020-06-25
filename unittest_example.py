@@ -35,10 +35,6 @@ class ExampleTest(unittest.TestCase):
         result = CLI().do_validate_data('This is Jimmy')
         self.assertFalse(result)
 
-    def test_wrong_do_bar_chart(self):
-        result = CLI().do_bar_chart('LoveYou')
-        self.assertFalse(result)
-
     def test_correct_input_do_bar_chart(self):
         try:
             result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')

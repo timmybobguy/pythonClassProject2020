@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import doctest
 
 
+
 class Strategy(metaclass=ABCMeta):
 
     def __init__(self, file):

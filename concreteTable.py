@@ -19,6 +19,7 @@ class ConcreteTable(Builder):
         super().__init__(file)
 
     def get_inform(self):
+
         file_name = CheckDirectory.check_file(self, self.file)
         file = open(file_name)
         file1 = file.read()
