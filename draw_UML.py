@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 import os
 import subprocess
-import doctest
+
 
 class Site(metaclass=ABCMeta):
 
@@ -46,13 +46,11 @@ class DotSite(Site):
     def get_diagram(self):
         self.p = "pyreverse {0} -o dot -p diagram".format(self.file)
 
-if __name__ == '__main__':
-    fig = FigSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
-    fig.get_diagram()
-    fig.run()
 
-    dot = DotSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
-    dot.get_diagram()
-    dot.run()
+if __name__ == '__main__':
+    svg = SvgSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
+    svg.run_all()
+
+
 
 
