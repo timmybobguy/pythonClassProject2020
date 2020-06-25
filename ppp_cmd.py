@@ -22,6 +22,7 @@ from argparse import ArgumentParser
 import re
 from pieChart import CreatePieChart
 from Builder import Director, ConcreteBuilderPyReverse
+from Decorator import *
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -266,55 +267,18 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             if ext.lower() != '.py':
                 print('Unsupported file extension, only accepts .py files')
             else:
-                num_classes = 0
-                num_functions = 0
-                num_attribute = 0
 
-                labels = []
-                sizes = []
+                pieChart = ConcretePieChart(file, file_data)
 
-                # labels = 'Classes', 'Functions', 'Attributes'
-                # sizes = [num_classes, num_functions, num_attribute]
+                for arg in arguments:
+                    if arg == "Classes":
+                        pieChart = ConcreteDecoratorClasses(pieChart)
+                    if arg == "Functions":
+                        pieChart = ConcreteDecoratorFunctions(pieChart)
+                    if arg == "Attributes":
+                        pieChart = ConcreteDecoratorAttributes(pieChart)
 
-                if "Classes" in arguments:
-
-                    labels.append("Classes")
-                    regex = r"class"
-
-                    matches = re.finditer(regex, file_data, re.MULTILINE)
-                    for _ in matches:
-                        num_classes += 1
-
-                    sizes.append(num_classes)
-
-                if "Functions" in arguments:
-
-                    labels.append("Functions")
-                    regex = r"def"
-
-                    matches = re.finditer(regex, file_data, re.MULTILINE)
-                    for _ in matches:
-                        num_functions += 1
-                    sizes.append(num_functions)
-
-                if "Attributes" in arguments:
-
-                    labels.append("Attributes")
-                    regex = r"self.*="
-
-                    matches = re.finditer(regex, file_data, re.MULTILINE)
-
-                    for _ in matches:
-                        num_attribute += 1
-                    sizes.append(num_attribute)
-
-                for label in labels:
-                    print(label)
-                for size in sizes:
-                    print(size)
-
-                pie = CreatePieChart(labels, sizes, file)
-                pie.generate_pie_chart()
+                client_code(pieChart)
 
     def help_generate_pie_chart(self):
         print(self.__json.get_help_text('generatePieChart'))

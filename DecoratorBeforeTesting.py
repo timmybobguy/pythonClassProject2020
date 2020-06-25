@@ -8,7 +8,7 @@ import unittest
 class BranchCoverageTests2(unittest.TestCase):
 
     baseDir = "C:/Users/TimDesk/PycharmProjects/" \
-              "pythonClassProject2020/ppp_cmd.py"
+              "pythonClassProject2020/test4.py"
 
     def test_1(self):
         cli = ppp_cmd.CLI()
@@ -23,7 +23,7 @@ class BranchCoverageTests2(unittest.TestCase):
 
         actual = capturedOutput.getvalue()
 
-        expected = 'Classes\nFunctions\nAttributes\n11\n35\n1\n'
+        expected = 'Classes\nFunctions\nAttributes\n3\n6\n1\n'
 
         self.assertEqual(actual, expected)  # Assert
 
