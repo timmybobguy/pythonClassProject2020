@@ -251,10 +251,11 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
         loop.close()
 
-    def do_generate_pie_chart(self, file):
+    def do_generate_pie_chart(self, arguments):
 
+        arguments = arguments.split()
         try:
-            with open(file, 'r') as file:
+            with open(arguments[0], 'r') as file:
                 file_data = file.read().replace('\n', '')
         except FileNotFoundError:
             print("No such file found")
@@ -262,35 +263,56 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         else:
 
             ext = os.path.splitext(file.name)[1]  # [0] returns path+filename
-            valid_extensions = ['.py']
-            if not ext.lower() in valid_extensions:
+            if ext.lower() != '.py':
                 print('Unsupported file extension, only accepts .py files')
             else:
                 num_classes = 0
                 num_functions = 0
                 num_attribute = 0
 
-                regex = r"class"
+                labels = []
+                sizes = []
 
-                matches = re.finditer(regex, file_data, re.MULTILINE)
-                for _ in matches:
-                    num_classes += 1
+                # labels = 'Classes', 'Functions', 'Attributes'
+                # sizes = [num_classes, num_functions, num_attribute]
 
-                regex = r"def"
+                if "Classes" in arguments:
 
-                matches = re.finditer(regex, file_data, re.MULTILINE)
-                for _ in matches:
-                    num_functions += 1
+                    labels.append("Classes")
+                    regex = r"class"
 
-                regex = r"self.*="
+                    matches = re.finditer(regex, file_data, re.MULTILINE)
+                    for _ in matches:
+                        num_classes += 1
 
-                matches = re.finditer(regex, file_data, re.MULTILINE)
+                    sizes.append(num_classes)
 
-                for _ in matches:
-                    num_attribute += 1
+                if "Functions" in arguments:
 
-                labels = 'Classes', 'Functions', 'Attributes'
-                sizes = [num_classes, num_functions, num_attribute]
+                    labels.append("Functions")
+                    regex = r"def"
+
+                    matches = re.finditer(regex, file_data, re.MULTILINE)
+                    for _ in matches:
+                        num_functions += 1
+                    sizes.append(num_functions)
+
+                if "Attributes" in arguments:
+
+                    labels.append("Attributes")
+                    regex = r"self.*="
+
+                    matches = re.finditer(regex, file_data, re.MULTILINE)
+
+                    for _ in matches:
+                        num_attribute += 1
+                    sizes.append(num_attribute)
+
+                for label in labels:
+                    print(label)
+                for size in sizes:
+                    print(size)
+
                 pie = CreatePieChart(labels, sizes, file)
                 pie.generate_pie_chart()
 
