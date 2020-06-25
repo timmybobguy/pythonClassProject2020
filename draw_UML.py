@@ -3,25 +3,24 @@
 from abc import ABCMeta, abstractmethod
 import os
 import subprocess
-
+import doctest
 
 class Site(metaclass=ABCMeta):
 
     def __init__(self, file):
         self.file = file
-
-    def get_file(self):
-        name = os.path.basename(self.file)
-        return name
-
+        self.p = ""
 
     @abstractmethod
     def get_diagram(self):
         pass
 
     def run(self):
-        p = self.get_diagram()
-        subprocess.run(p, cwd=os.path.dirname(self.file), shell=True)
+        subprocess.run(self.p, cwd=os.path.dirname(self.file), shell=True)
+
+    def run_all(self):
+        self.get_diagram()
+        self.run()
 
 
 class SvgSite(Site):
@@ -29,8 +28,7 @@ class SvgSite(Site):
         super().__init__(file)
 
     def get_diagram(self):
-        command = "pyreverse {0} -o svg -p diagram".format(self.file)
-        return command
+        self.p = "pyreverse {0} -o svg -p diagram".format(self.file)
 
 
 class FigSite(Site):
@@ -38,8 +36,7 @@ class FigSite(Site):
         super().__init__(file)
 
     def get_diagram(self):
-        command = "pyreverse {0} -o fig -p diagram".format(self.file)
-        return command
+        self.p = "pyreverse {0} -o fig -p diagram".format(self.file)
 
 
 class DotSite(Site):
@@ -47,15 +44,9 @@ class DotSite(Site):
         super().__init__(file)
 
     def get_diagram(self):
-        command = "pyreverse {0} -o dot -p diagram".format(self.file)
-        return command
-
+        self.p = "pyreverse {0} -o dot -p diagram".format(self.file)
 
 if __name__ == '__main__':
-    svg = SvgSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
-    svg.get_diagram()
-    svg.run()
-
     fig = FigSite("/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py")
     fig.get_diagram()
     fig.run()

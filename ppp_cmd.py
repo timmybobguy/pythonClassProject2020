@@ -21,9 +21,7 @@ from jsonTesting import JsonData
 from argparse import ArgumentParser
 import re
 from pieChart import CreatePieChart
-from director import Director
-from concreteBar import ConcreteBar
-from concreteTable import ConcreteTable
+from strategy import *
 from draw_UML import SvgSite, FigSite, DotSite
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
@@ -130,16 +128,13 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
 
             if file_type == '-svg':
                 svg = SvgSite(input_file)
-                svg.get_diagram()
-                svg.run()
+                svg.run_all()
             elif file_type == '-fig':
                 fig = FigSite(input_file)
-                fig.get_diagram()
-                fig.run()
+                fig.run_all()
             elif file_type == '-dot':
                 dot = DotSite(input_file)
-                dot.get_diagram()
-                dot.run()
+                dot.run_all()
             else:
                 print(" You only have 3 options which are svg, dot and fig in the file types")
 
@@ -173,16 +168,13 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         input_file = raw_data[0]
         chart = raw_data[1]
         if chart == "-t":
-            table = ConcreteTable(input_file)
-            director = Director(table)
-            director.construct()
+            con = Context(Table(input_file))
+            con.chart()
         elif chart == "-b":
-            bar = ConcreteBar(input_file)
-            director = Director(bar)
-            director.construct()
+            con2 = Context(Bar(input_file))
+            con2.chart()
         else:
             print("Please choose a table or bar chart")
-
 
     def help_bar_chart(self):
         print(self.__json.get_help_text('bar_chart'))
