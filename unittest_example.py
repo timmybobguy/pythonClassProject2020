@@ -1,61 +1,40 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 # -*- coding: utf-8 -*-
 import unittest
-from checkfiles import CheckDirectory
-from validate_data import ValidateData
-from mysql_example import LinkDb
 from ppp_cmd import*
+from strategy import *
+from draw_UML import SvgSite, FigSite, DotSite
 
 # Wu, Chieh-Ming (Jimmy's work)
 
 
 class ExampleTest(unittest.TestCase):
     """Jimmy's unittest """
-
-    def test_checkdirectory(self):
-        self.assertEqual(CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py'), 'test4.py')
-
-    def test_correct_input_path(self):
-        try:
-            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/test4.py')
-            self.assertIsInstance(result, str)
-        except WrongInputException:
-            self.fail()
-
-    def test_mydb_link(self):
-        self.assertRaises(FileNotFoundError, ValidateData().check_file, "FileNotFoundError")
-
-    def test_correct_path_validate_data(self):
-
-        result = CLI().do_validate_data('/Users/jimmy/py/pythonClassProject2020/test3.py')
+    def test_uml_diagram_svg(self):
+        text = "/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -svg"
+        result = CLI().do_uml_diagram(text)
         self.assertTrue(result)
 
-    def test_wrong_path_validate_data(self):
-
-        result = CLI().do_validate_data('This is Jimmy')
-        self.assertFalse(result)
-
-    def test_correct_input_do_bar_chart(self):
-        try:
-            result = CheckDirectory().check_file('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py')
-            self.assertIsInstance(result, str)
-        except WrongInputException:
-            self.fail()
-
-    def test_do_exit(self):
-        result = CLI().do_exit()
-        self.assertIsInstance(result, bool)
-
-    def test_return_do_exit(self):
-        result = CLI().do_exit()
+    def test_uml_diagram_fig(self):
+        text = "/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -fig"
+        result = CLI().do_uml_diagram(text)
         self.assertTrue(result)
 
-    def test_throw_raise(self):
-        self.assertRaises(FileNotFoundError, ValidateData().check_file, "You should input a correct path")
+    def test_uml_diagram_dot(self):
+        text = "/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -dot"
+        result = CLI().do_uml_diagram(text)
+        self.assertTrue(result)
 
-    def test_false_do_save_data(self):
-        result = CLI().do_save_data('1234')
+    def test_uml_diagram_dot(self):
+        text = "/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -png"
+        result = CLI().do_uml_diagram(text)
         self.assertFalse(result)
+
+    def test_chart(self):
+        result = CLI().do_chart('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -b')
+        self.assertTrue(result)
+
+
 
 
 

@@ -23,6 +23,7 @@ import re
 from pieChart import CreatePieChart
 from strategy import *
 from draw_UML import SvgSite, FigSite, DotSite
+from coverage import *
 
 os.environ["PATH"] += os.pathsep + './graphviz/release/bin'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -123,20 +124,23 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
             os.path.isfile(input_file)
         except FileNotFoundError:
             print("wrong path, try again")
-
         else:
 
             if file_type == '-svg':
                 svg = SvgSite(input_file)
                 svg.run_all()
+                return True
             elif file_type == '-fig':
                 fig = FigSite(input_file)
                 fig.run_all()
+                return True
             elif file_type == '-dot':
                 dot = DotSite(input_file)
                 dot.run_all()
+                return True
             else:
                 print(" You only have 3 options which are svg, dot and fig in the file types")
+                return False
 
     def help_uml_diagram(self):
         print(self.__json.get_help_text('uml_diagram'))
@@ -170,11 +174,15 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         if chart == "-t":
             con = Context(Table(input_file))
             con.chart()
+            path = True
         elif chart == "-b":
             con2 = Context(Bar(input_file))
             con2.chart()
+            path = True
         else:
             print("Please choose a table or bar chart")
+            path = False
+        return path
 
     def help_bar_chart(self):
         print(self.__json.get_help_text('bar_chart'))
