@@ -119,28 +119,21 @@ class CLI(cmd.Cmd):  # MyAsyncShell - This is not working bugged !!!
         raw_data = args.split()
         input_file = raw_data[0]
         file_type = raw_data[1]
-        try:
-            os.path.isdir(input_file)
-            os.path.isfile(input_file)
-        except FileNotFoundError:
-            print("wrong path, try again")
+        if file_type == '-svg':
+            svg = SvgSite(input_file)
+            svg.run_all()
+            return True
+        elif file_type == '-fig':
+            fig = FigSite(input_file)
+            fig.run_all()
+            return True
+        elif file_type == '-dot':
+            dot = DotSite(input_file)
+            dot.run_all()
+            return True
         else:
-
-            if file_type == '-svg':
-                svg = SvgSite(input_file)
-                svg.run_all()
-                return True
-            elif file_type == '-fig':
-                fig = FigSite(input_file)
-                fig.run_all()
-                return True
-            elif file_type == '-dot':
-                dot = DotSite(input_file)
-                dot.run_all()
-                return True
-            else:
-                print(" You only have 3 options which are svg, dot and fig in the file types")
-                return False
+            print(" You only have 3 options which are svg, dot and fig in the file types")
+            return False
 
     def help_uml_diagram(self):
         print(self.__json.get_help_text('uml_diagram'))

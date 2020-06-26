@@ -25,7 +25,7 @@ class ExampleTest(unittest.TestCase):
         result = CLI().do_uml_diagram(text)
         self.assertTrue(result)
 
-    def test_uml_diagram_dot(self):
+    def test_uml_diagram_wrong(self):
         text = "/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -png"
         result = CLI().do_uml_diagram(text)
         self.assertFalse(result)
@@ -34,8 +34,13 @@ class ExampleTest(unittest.TestCase):
         result = CLI().do_chart('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -b')
         self.assertTrue(result)
 
+    def test_table(self):
+        result = CLI().do_chart('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -t')
+        self.assertTrue(result)
 
-
+    def test_chart_wrong(self):
+        result = CLI().do_chart('/Users/jimmy/py/pythonClassProject2020/ppp_cmd.py -a')
+        self.assertFalse(result)
 
 
 if __name__ == '__main__':
